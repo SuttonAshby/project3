@@ -1,64 +1,22 @@
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  ScrollView
-} from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Container from './src/components/Container';
-import Button from './src/components/Button';
-import Label from './src/components/Label';
+import {
+  StackNavigator,
+} from 'react-navigation';
+import Login from './src/pages/Login';
 
-export default class App extends Component {
+
+export default class App extends React.Component {
   render() {
     return (
-      <ScrollView style={styles.scroll}>
-        <Container>
-          <Label text="Username or Email" />
-          <TextInput
-            style={styles.textInput}
-          />
-        </Container>
-        <Container>
-          <Label text="Password" />
-          <TextInput
-            secureTextEntry={true}
-            style={styles.textInput}
-          />
-        </Container>
-        <Container>
-          <Button
-            label="Register"
-            styles={{ button: styles.alignRight, label: styles.label }}
-            />
-            <Button
-            label="Login"
-            styles={{ button: styles.alignRight, label: styles.label }}
-            />
-        </Container>
-      </ScrollView>
-       );
-      }
+      <Login />
+        // <View>
+        // <Text>Open up App.js to start working on your app!</Text>
+        // <Text>Changes you make will automatically reload.</Text>
+        // <Text>Shake your phone to open the developer menu.</Text>
+        // <Text>Joseph Holder</Text> */}
+        // </View>
+    );
   }
-  
-  const styles = StyleSheet.create({
-      scroll: {
-          backgroundColor: '#E1D7D8',
-          padding: 30,
-          flexDirection: 'column'
-      },
-      label: {
-          color: '#0d8898',
-          fontSize: 20
-      },
-      alignRight: {
-          alignSelf: 'flex-end'
-      },
-      textInput: {
-        height: 80,
-        fontSize: 30,
-        backgroundColor: '#FFF'
-    },
-  });
+}
