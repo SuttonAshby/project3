@@ -1,33 +1,64 @@
-'use strict';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
 import {
-  StackNavigator,
-} from 'react-navigation';
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  ScrollView
+} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Container from './src/components/Container';
+import Button from './src/components/Button';
+import Label from './src/components/Label';
 
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-<<<<<<< HEAD
-        <Text>Shake your phone to open the developer menu.</Text>
-        <Text>Joseph Holder</Text>
-
-=======
-        <Text>Cool</Text>
->>>>>>> f37b6071bd51a0534e493896e8ab9a04492a915b
-      </View>
-    );
+      <ScrollView style={styles.scroll}>
+        <Container>
+          <Label text="Username or Email" />
+          <TextInput
+            style={styles.textInput}
+          />
+        </Container>
+        <Container>
+          <Label text="Password" />
+          <TextInput
+            secureTextEntry={true}
+            style={styles.textInput}
+          />
+        </Container>
+        <Container>
+          <Button
+            label="Register"
+            styles={{ button: styles.alignRight, label: styles.label }}
+            />
+            <Button
+            label="Login"
+            styles={{ button: styles.alignRight, label: styles.label }}
+            />
+        </Container>
+      </ScrollView>
+       );
+      }
   }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  
+  const styles = StyleSheet.create({
+      scroll: {
+          backgroundColor: '#E1D7D8',
+          padding: 30,
+          flexDirection: 'column'
+      },
+      label: {
+          color: '#0d8898',
+          fontSize: 20
+      },
+      alignRight: {
+          alignSelf: 'flex-end'
+      },
+      textInput: {
+        height: 80,
+        fontSize: 30,
+        backgroundColor: '#FFF'
+    },
+  });
