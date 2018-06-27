@@ -5,12 +5,13 @@ import {
   StackNavigator,
 } from 'react-navigation';
 import Login from './src/pages/Login';
+import Home from './src/pages/Home';
 
 
 export default class App extends React.Component {
   render() {
     return (
-      <Login />
+      <Home />
         // <View>
         // <Text>Open up App.js to start working on your app!</Text>
         // <Text>Changes you make will automatically reload.</Text>
