@@ -40,8 +40,6 @@ const styles = {
     //   flexDirection: 'row',
       flex: .5,
       aspectRatio: 1,
-      justifyContent: 'center',
-      alignItems: 'center'
     },
     headerStyle: {
       fontSize: 36,
