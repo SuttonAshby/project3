@@ -6,12 +6,13 @@ import {
 } from 'react-navigation';
 import Login from './src/pages/Login';
 import Home from './src/pages/Home';
+import CameraView from './src/pages/CameraView';
 
 
 export default class App extends React.Component {
   render() {
     return (
-      <Home />
+      <CameraView />
         // <View>
         // <Text>Open up App.js to start working on your app!</Text>
         // <Text>Changes you make will automatically reload.</Text>
