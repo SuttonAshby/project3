@@ -11,7 +11,7 @@ import Container from '../components/Container';
 import Button from '../components/Button';
 import Label from '../components/Label';
 
-class Login extends Component {
+class Register extends Component {
 
     state = {
         username: "",
@@ -20,7 +20,7 @@ class Login extends Component {
 
     loginSubmit = event => {
         event.preventDefault();
-        console.log(`Hello ${this.state.username} ${this.state.password}`);
+        console.log(`Hello joe ${this.state.username} ${this.state.password}`);
     };
 
     render() {
@@ -48,14 +48,20 @@ class Login extends Component {
                     />
                 </Container>
                 <Container>
-                    <Button
-                        label="Register"
-                        styles={{ button: styles.alignRight, label: styles.label }}
+                    <Label text="Re-enter your password" />
+                    <TextInput
+                        secureTextEntry={true}
+                        name="password"
+                        style={styles.textInput}
+                        onChangeText={(text) => this.setState({text})}
+                        value={this.state.password2}
                     />
+                </Container>
+                <Container>
+                    {/* should log you in and create your account */}
                     <Button
-                        label="Login"
+                        label="Submit"
                         styles={{ button: styles.alignRight, label: styles.label }}
-                        onPress={this.loginSubmit}
                     />
                 </Container>
             </ScrollView>
@@ -82,4 +88,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Login;
+export default Register;
