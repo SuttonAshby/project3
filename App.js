@@ -7,12 +7,13 @@ import {
 import Login from './src/pages/Login';
 import Home from './src/pages/Home';
 import CameraView from './src/pages/CameraView';
+import ImagePickerTest from './src/pages/ImagePickerTest';
 
 
 export default class App extends React.Component {
   render() {
     return (
-      <CameraView />
+      <Home />
         // <View>
         // <Text>Open up App.js to start working on your app!</Text>
         // <Text>Changes you make will automatically reload.</Text>
