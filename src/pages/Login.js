@@ -16,23 +16,39 @@ class Login extends Component {
     state = {
         username: "",
         password: ""
-      };
+    };
+
+    handleUsernameInput = text => {
+        this.setState({
+            username: text
+        });
+    };
+
+    handlePasswordInput = text => {
+        this.setState({
+            password: text
+        });
+    };
 
     loginSubmit = event => {
-        event.preventDefault();
+        // business to send to server to login user
+        console.log(`Hello ${this.state.username} ${this.state.password}`);
+    };
+
+    registerSubmit = event => {
+        // redirect to register page
         console.log(`Hello ${this.state.username} ${this.state.password}`);
     };
 
     render() {
         return (
-
             <ScrollView style={styles.scroll}>
                 <Container>
                     <Label text="Username" />
                     <TextInput
                         style={styles.textInput}
                         name="username"
-                        onChangeText={(text) => this.setState({text})}
+                        onChangeText={this.handleUsernameInput}
                         type="text"
                         value={this.state.username}
                     />
@@ -43,7 +59,7 @@ class Login extends Component {
                         secureTextEntry={true}
                         name="password"
                         style={styles.textInput}
-                        onChangeText={(text) => this.setState({text})}
+                        onChangeText={this.handlePasswordInput}
                         value={this.state.password}
                     />
                 </Container>
@@ -51,6 +67,7 @@ class Login extends Component {
                     <Button
                         label="Register"
                         styles={{ button: styles.alignRight, label: styles.label }}
+                        onPress={this.registerSubmit}
                     />
                     <Button
                         label="Login"

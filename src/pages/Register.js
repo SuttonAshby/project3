@@ -15,10 +15,29 @@ class Register extends Component {
 
     state = {
         username: "",
-        password: ""
-      };
+        password: "",
+        password2: ""
+    };
 
-    loginSubmit = event => {
+    handleUsernameInput = text => {
+        this.setState({
+            username: text
+        });
+    };
+
+    handlePasswordInput = text => {
+        this.setState({
+            password: text
+        });
+    };
+
+    handlePassword2Input = text => {
+        this.setState({
+            password2: text
+        });
+    };
+
+    registerSubmit = event => {
         event.preventDefault();
         console.log(`Hello joe ${this.state.username} ${this.state.password}`);
     };
@@ -32,7 +51,7 @@ class Register extends Component {
                     <TextInput
                         style={styles.textInput}
                         name="username"
-                        onChangeText={(text) => this.setState({text})}
+                        onChangeText={this.handleUsernameInput}
                         type="text"
                         value={this.state.username}
                     />
@@ -43,7 +62,7 @@ class Register extends Component {
                         secureTextEntry={true}
                         name="password"
                         style={styles.textInput}
-                        onChangeText={(text) => this.setState({text})}
+                        onChangeText={this.handlePasswordInput}
                         value={this.state.password}
                     />
                 </Container>
@@ -53,7 +72,7 @@ class Register extends Component {
                         secureTextEntry={true}
                         name="password"
                         style={styles.textInput}
-                        onChangeText={(text) => this.setState({text})}
+                        onChangeText={this.handlePassword2Input}
                         value={this.state.password2}
                     />
                 </Container>
@@ -62,6 +81,7 @@ class Register extends Component {
                     <Button
                         label="Submit"
                         styles={{ button: styles.alignRight, label: styles.label }}
+                        onPress={this.registerSubmit}
                     />
                 </Container>
             </ScrollView>

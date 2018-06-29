@@ -12,7 +12,7 @@ import Register from './src/pages/Register';
 export default class App extends React.Component {
   render() {
     return (
-      <Register />
+      <Login />
         // <View>
         // <Text>Open up App.js to start working on your app!</Text>
         // <Text>Changes you make will automatically reload.</Text>
