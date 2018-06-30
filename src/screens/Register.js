@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Container from '../components/Container';
 import Button from '../components/Button';
 import Label from '../components/Label';
+import { addUser } from '../services/addUserService';
 
 class Register extends Component {
 
@@ -38,8 +39,29 @@ class Register extends Component {
     };
 
     registerSubmit = event => {
-        event.preventDefault();
-        console.log(`Hello joe ${this.state.username} ${this.state.password}`);
+        username = this.state.username;
+        password = this.state.password;
+        password2 = this.state.password2;
+
+        if (password != password2) {
+            Alert.alert(
+                'Passwords must match',
+                [
+                    { text: 'OK', onPress: () => console.log('OK Pressed') },
+                ],
+                { cancelable: false }
+            )
+        } else {
+            var user = {
+                username: username,
+                password: password,
+            };
+            addUser(user);
+
+            console.log("transition to game page next")
+            //transition to game page
+            console.log("transition to game page next")
+        };
     };
 
     render() {
