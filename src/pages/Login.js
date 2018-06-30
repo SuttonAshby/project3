@@ -33,6 +33,32 @@ class Login extends Component {
     loginSubmit = event => {
         // business to send to server to login user
         console.log(`Hello ${this.state.username} ${this.state.password}`);
+        username = this.state.username;
+        password = this. state.password;
+        var user = {
+            username: username,
+            password: password
+        };
+        $.ajax({
+            method: "POST",
+            url: "/api/login",
+            data: user
+        }).then(function (data) {
+            console.log(data);
+            if (data === null) {
+                Alert.alert(
+                    'Incorrect Login Information',
+                    'Username or Password is incorrect',
+                    [
+                      {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    ],
+                    { cancelable: false }
+                  )            
+                } else {
+                //transition to game page
+                console.log("transition to game page next")
+            }
+        });
     };
 
     registerSubmit = event => {
