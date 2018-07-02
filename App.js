@@ -6,6 +6,8 @@ import {
 } from 'react-navigation';
 import Login from './src/pages/Login';
 import Home from './src/pages/Home';
+import CameraView from './src/pages/CameraView';
+import ImagePickerTest from './src/pages/ImagePickerTest';
 
 
 export default class App extends React.Component {
