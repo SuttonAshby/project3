@@ -1,19 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { createStackNavigator } from 'react-navigation';
 import Login from './src/screens/Login';
 import Home from './src/screens/Home';
 import Register from './src/screens/Register';
+import Loading from './src/screens/Loading';
+
 
 const RootStack = createStackNavigator(
   {
     HomeScreen: Home,
     LoginScreen: Login,
     RegisterScreen: Register,
+    LoadingScreen: Loading,
   },
   {
-    initialRouteName: 'RegisterScreen',
+    initialRouteName: 'LoadingScreen',
   }
 );
 

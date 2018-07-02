@@ -4,7 +4,8 @@ import {
     Text,
     View,
     TextInput,
-    ScrollView
+    ScrollView,
+    Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Container from '../components/Container';
@@ -15,14 +16,14 @@ import { addUser } from '../services/addUserService';
 class Register extends Component {
 
     state = {
-        username: "",
+        email: "",
         password: "",
         password2: ""
     };
 
-    handleUsernameInput = text => {
+    handleEmailInput = text => {
         this.setState({
-            username: text
+            email: text
         });
     };
 
@@ -39,7 +40,7 @@ class Register extends Component {
     };
 
     registerSubmit = event => {
-        username = this.state.username;
+        email = this.state.email;
         password = this.state.password;
         password2 = this.state.password2;
 
@@ -53,7 +54,7 @@ class Register extends Component {
             )
         } else {
             var user = {
-                username: username,
+                email: email,
                 password: password,
             };
             addUser(user);
@@ -69,13 +70,13 @@ class Register extends Component {
 
             <ScrollView style={styles.scroll}>
                 <Container>
-                    <Label text="Username" />
+                    <Label text="Email" />
                     <TextInput
                         style={styles.textInput}
-                        name="username"
-                        onChangeText={this.handleUsernameInput}
+                        name="email"
+                        onChangeText={this.handleEmailInput}
                         type="text"
-                        value={this.state.username}
+                        value={this.state.email}
                     />
                 </Container>
                 <Container>

@@ -14,13 +14,13 @@ import Label from '../components/Label';
 class Login extends Component {
 
     state = {
-        username: "",
+        email: "",
         password: ""
     };
 
-    handleUsernameInput = text => {
+    handleEmailInput = text => {
         this.setState({
-            username: text
+            email: text
         });
     };
 
@@ -32,11 +32,11 @@ class Login extends Component {
 
     loginSubmit = event => {
         // business to send to server to login user
-        console.log(`Hello ${this.state.username} ${this.state.password}`);
-        username = this.state.username;
+        console.log(`Hello ${this.state.email} ${this.state.password}`);
+        email = this.state.email;
         password = this.state.password;
         var user = {
-            username: username,
+            email: email,
             password: password
         };
         fetch('https://mywebsite.com/endpoint/', {
@@ -59,7 +59,7 @@ class Login extends Component {
         //     if (data === null) {
         //         Alert.alert(
         //             'Incorrect Login Information',
-        //             'Username or Password is incorrect',
+        //             'email or Password is incorrect',
         //             [
         //               {text: 'OK', onPress: () => console.log('OK Pressed')},
         //             ],
@@ -74,20 +74,20 @@ class Login extends Component {
 
     registerSubmit = event => {
         // redirect to register page
-        console.log(`Hello ${this.state.username} ${this.state.password}`);
+        console.log(`Hello ${this.state.email} ${this.state.password}`);
     };
 
     render() {
         return (
             <ScrollView style={styles.scroll}>
                 <Container>
-                    <Label text="Username" />
+                    <Label text="Email" />
                     <TextInput
                         style={styles.textInput}
-                        name="username"
-                        onChangeText={this.handleUsernameInput}
+                        name="email"
+                        onChangeText={this.handleEmailInput}
                         type="text"
-                        value={this.state.username}
+                        value={this.state.email}
                     />
                 </Container>
                 <Container>
@@ -104,8 +104,8 @@ class Login extends Component {
                     <Button
                         label="Register"
                         styles={{ button: styles.alignRight, label: styles.label }}
-                        onPress={this.registerSubmit}
-                    />
+                        onPress={() => this.props.navigation.navigate('RegisterScreen')}
+                        />
                     <Button
                         label="Login"
                         styles={{ button: styles.alignRight, label: styles.label }}
