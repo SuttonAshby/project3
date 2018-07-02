@@ -195,9 +195,10 @@ export default class Home extends Component {
                         this._container = view;
                     }} >
                     <View style={styles.board}>
-                        <View style={styles.row}>
+                        <View style={styles.column}>
+                            {/* THIS IS COLUMN ONE ================================================================================== */}
                             {/* THIS IS SQUARE ONE ================================================================================== */}
-                            {this.state.board[0].source ? <TouchableHighlight style={[styles.square, {backgroundColor: '#EE2C38'}]}
+                            {this.state.board[0].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#EE2C38' }]}
                                 onPress={() => {
                                     this.setState({ currentSquare: 1 })
                                     this.setModalVisible(true);
@@ -239,7 +240,8 @@ export default class Home extends Component {
                                         this.setState({ currentSquare: 3 })
                                     }}><Text>Three</Text></TouchableHighlight>}
                         </View>
-                        <View style={styles.row}>
+                        <View style={styles.column}>
+                            {/* THIS IS COLUMN ONE ================================================================================== */}
                             {/* THIS IS SQUARE FOUR ================================================================================== */}
                             {this.state.board[3].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#FAA030' }}
                                 onPress={() => {
@@ -283,9 +285,10 @@ export default class Home extends Component {
                                         this.setState({ currentSquare: 6 })
                                     }}><Text>Six</Text></TouchableHighlight>}
                         </View>
-                        <View style={styles.row}>
-                       {/* THIS IS SQUARE SEVEN ================================================================================== */}
-                       {this.state.board[6].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }}
+                        <View style={styles.column}>
+                            {/* THIS IS COLUMN ONE ================================================================================== */}
+                            {/* THIS IS SQUARE SEVEN ================================================================================== */}
+                            {this.state.board[6].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }}
                                 onPress={() => {
                                     this.setState({ currentSquare: 7 })
                                     this.setModalVisible(true);
@@ -298,7 +301,7 @@ export default class Home extends Component {
                                         this.setModalVisible(true);
                                         this.setState({ currentSquare: 7 })
                                     }}><Text>One</Text></TouchableHighlight>}
-                                     {/* THIS IS SQUARE EIGHT ================================================================================== */}
+                            {/* THIS IS SQUARE EIGHT ================================================================================== */}
                             {this.state.board[7].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#FAA030' }}
                                 onPress={() => {
                                     this.setState({ currentSquare: 8 })
@@ -312,7 +315,7 @@ export default class Home extends Component {
                                         this.setModalVisible(true);
                                         this.setState({ currentSquare: 8 })
                                     }}><Text>Eight</Text></TouchableHighlight>}
-                                     {/* THIS IS SQUARE ONE ================================================================================== */}
+                            {/* THIS IS SQUARE ONE ================================================================================== */}
                             {this.state.board[8].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#32B76C' }}
                                 onPress={() => {
                                     this.setState({ currentSquare: 9 })
@@ -337,7 +340,7 @@ export default class Home extends Component {
                         }}>
                         <View style={styles.container}>
                             <View style={styles.board}>
-                                <View style={styles.row}>
+                                <View style={styles.column}>
                                     <Camera style={styles.camera}
                                         type={this.state.type}
                                         ref={ref => {
@@ -349,16 +352,23 @@ export default class Home extends Component {
                                                 backgroundColor: 'transparent',
                                                 flexDirection: 'row',
                                             }} />
-                                        <TouchableHighlight
+                                        {/* <TouchableHighlight
                                             onPress={() => {
                                                 this.setModalVisible(!this.state.modalVisible);
                                             }}>
                                             <Text>Hide Modal</Text>
-                                        </TouchableHighlight>
+                                        </TouchableHighlight> */}
                                         <Button
-                                            title="Click On Me"
+                                            title="Snap"
                                             style={{ flex: 0, backgroundColor: 'red' }}
                                             onPress={this.press.bind(this)}
+                                        />
+                                        <Button
+                                            title="Back"
+                                            style={{ flex: 0, backgroundColor: 'red' }}
+                                            onPress={() => {
+                                                this.setModalVisible(!this.state.modalVisible);
+                                            }}
                                         />
                                     </Camera>
                                 </View>
@@ -393,7 +403,7 @@ const styles = {
         // justifyContent: 'center',
         // alignItems: 'center',
     },
-    row: {
+    column: {
         flexDirection: 'column',
         flex: 1,
         //   marginLeft: 24,
@@ -402,7 +412,7 @@ const styles = {
     },
     square: {
         flex: 1,
-        transform: [{ rotate: '90deg'}]
+        transform: [{ rotate: '90deg' }]
         //TODO: fix camera orientation
     },
     camera: {
