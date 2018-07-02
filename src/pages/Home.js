@@ -197,7 +197,7 @@ export default class Home extends Component {
                     <View style={styles.board}>
                         <View style={styles.row}>
                             {/* THIS IS SQUARE ONE ================================================================================== */}
-                            {this.state.board[0].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }}
+                            {this.state.board[0].source ? <TouchableHighlight style={[styles.square, {backgroundColor: '#EE2C38'}]}
                                 onPress={() => {
                                     this.setState({ currentSquare: 1 })
                                     this.setModalVisible(true);
@@ -399,6 +399,11 @@ const styles = {
         //   marginLeft: 24,
         //   marginRight: 24,
         //   marginBottom: 24
+    },
+    square: {
+        flex: 1,
+        transform: [{ rotate: '90deg'}]
+        //TODO: fix camera orientation
     },
     camera: {
         flex: 1,
