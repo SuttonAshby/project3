@@ -24,13 +24,23 @@ export default class Home extends Component {
 
     state = {
         hasCameraPermission: null,
-        type: Camera.Constants.Type.front,
+        type: Camera.Constants.Type.back,
         cameraRollUri: null,
         // image: null,
-        
         // source: null,
         anime,
         modalVisible: false,
+        board: [{name: null, source: null},
+            {name: null, source: null},
+            {name: null, source: null},
+            {name: null, source: null},
+            {name: null, source: null},
+            {name: null, source: null},
+            {name: null, source: null},
+            {name: null, source: null},
+            {name: null, source: null},],
+        currentSquare: null
+
     };
 
     askPermissionsAsync = async () => { // this was needed to get image picker working and this has to be called in the method as well
@@ -88,10 +98,16 @@ export default class Home extends Component {
     // };
     // =================================================================
 
+    setModalVisible(visible) {
+        this.setState({ modalVisible: visible });
+    }
+
     //this works!!!
     async press() {
 
         console.log('Button Pressed');
+        //Toggle Modal
+        this.setModalVisible(!this.state.modalVisible)
 
         console.log('Taking photo');
         let photo = await this.camera.takePictureAsync({ base64: true, exif: true });
@@ -117,7 +133,6 @@ export default class Home extends Component {
             return (
 
 
-
                 // Try setting `flexDirection` to `column`.
                 <View style={styles.container}
                     collapsable={false}
@@ -126,9 +141,33 @@ export default class Home extends Component {
                     }} >
                     <View style={styles.board}>
                         <View style={styles.row}>
-                            <View style={{ flex: 1, backgroundColor: '#EE2C38' }} />
-                            <View style={{ flex: 1, backgroundColor: '#FAA030' }} />
-                            <View style={{ flex: 1, backgroundColor: '#32B76C' }} />
+                        {/* THIS IS SQUARE ONE */}
+                        {this.state.board[0].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }} 
+                            onPress={() => {
+                            this.setModalVisible(true);
+                            }}>
+                                <Image  source={{ uri: this.state.board[0].source}}
+                                        style={{ flex: 1 }}/>
+                            </TouchableHighlight>
+                        : <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }} 
+                        onPress={() => {
+                            this.setModalVisible(true);
+                            // this.state.board[0].source = this.state.cameraRollUri
+                            }}><Text>One</Text></TouchableHighlight> }
+                            {/* THIS IS SQUARE TWO */}
+                            {this.state.board[0].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }} 
+                            onPress={() => {
+                            this.setModalVisible(true);
+                            }}>
+                                <Image  source={{ uri: this.state.board[0].source}}
+                                        style={{ flex: 1 }}/>
+                            </TouchableHighlight>
+                        : <TouchableHighlight style={{ flex: 1, backgroundColor: '#FAA030' }} 
+                        onPress={() => {
+                            this.setModalVisible(true);
+                            }}><Text>Two</Text></TouchableHighlight> }
+                             {/* THIS IS SQUARE THREE */}
+                            <View style={{ flex: 1, backgroundColor: '#32B76C' }} /> 
                         </View>
                         <View style={styles.row}>
                             <View style={{ flex: 1, backgroundColor: '#32B76C' }} />
@@ -140,21 +179,22 @@ export default class Home extends Component {
                             <View style={{ flex: 1, backgroundColor: '#FAA030' }} />
                         </View>
                         <View style={styles.row}>
-                            <Camera
+                            {/* <Camera
                                 style={{ flex: 1 }}
                                 ref={(ref) => { this.camera = ref }}
                             >
                                 <View style={{ flex: 1 }}></View>
 
-                            </Camera>
+                            </Camera> */}
+                            <View style={{ flex: 1, backgroundColor: '#EE2C38' }} />
                             <View style={{ flex: 1, backgroundColor: '#FAA030' }} ><Text>save To Camera Roll Async</Text></View>
                             <View style={{ flex: 1, backgroundColor: '#32B76C' }} >
                                 <Text>ImageClicker</Text>
-                                <Button
+                                {/* <Button
                                     title="Click On Me"
                                     style={{ flex: 0, backgroundColor: 'red' }}
                                     onPress={this.press.bind(this)}
-                                />
+                                /> */}
                             </View>
                         </View>
                     </View>
@@ -167,8 +207,9 @@ export default class Home extends Component {
                         }}>
                         <View style={styles.container}>
                             <View style={styles.board}>
-                                <Camera style={{ flex: 1 }} type={this.state.type} ref={ref => {
-                                    this.camera = ref;
+                                <Camera style={{ flex: 1 }} 
+                                    type={this.state.type} 
+                                    ref={ref => {this.camera = ref;
                                 }}>
                                     <View
                                         style={{
@@ -182,18 +223,11 @@ export default class Home extends Component {
                                         }}>
                                         <Text>Hide Modal</Text>
                                     </TouchableHighlight>
-                                    {/* <TouchableHighlight
-                                    onPress={() => () => {
-                                        console.log("taking a picture")
-                                        // if (this.camera) {
-                                        //     let photo = this.camera.takePictureAsync({base64: true}).then( data => {
-                                        //         app.setState({photo: data});
-                                        //         console.log(this.state.photo)
-                                        //     });;
-                                        // }
-                                    }}>
-                                    <Text>Snap</Text>
-                                </TouchableHighlight> */}
+                                    <Button
+                                    title="Click On Me"
+                                    style={{ flex: 0, backgroundColor: 'red' }}
+                                    onPress={this.press.bind(this)}
+                                />
                                 </Camera>
 
                             </View>
