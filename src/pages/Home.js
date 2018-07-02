@@ -30,15 +30,15 @@ export default class Home extends Component {
         // source: null,
         anime,
         modalVisible: false,
-        board: [{name: null, source: null},
-            {name: null, source: null},
-            {name: null, source: null},
-            {name: null, source: null},
-            {name: null, source: null},
-            {name: null, source: null},
-            {name: null, source: null},
-            {name: null, source: null},
-            {name: null, source: null},],
+        board: [{ name: null, source: null },
+        { name: null, source: null },
+        { name: null, source: null },
+        { name: null, source: null },
+        { name: null, source: null },
+        { name: null, source: null },
+        { name: null, source: null },
+        { name: null, source: null },
+        { name: null, source: null }],
         currentSquare: null
 
     };
@@ -113,7 +113,64 @@ export default class Home extends Component {
         let photo = await this.camera.takePictureAsync({ base64: true, exif: true });
 
         let saveResult = await CameraRoll.saveToCameraRoll(photo.uri, 'photo');
-        this.setState({ cameraRollUri: saveResult });
+
+        let newBoard = null;
+        switch (this.state.currentSquare) {
+            case 1:
+                newBoard = this.state.board
+                newBoard[0].source = saveResult
+                this.setState({ board: newBoard })
+                break;
+            case 2:
+                newBoard = this.state.board
+                newBoard[1].source = saveResult
+                this.setState({ board: newBoard })
+                break;
+            case 3:
+                newBoard = this.state.board
+                newBoard[2].source = saveResult
+                this.setState({ board: newBoard })
+                break;
+            case 4:
+                newBoard = this.state.board
+                newBoard[3].source = saveResult
+                this.setState({ board: newBoard })
+                break;
+            case 5:
+                newBoard = this.state.board
+                newBoard[4].source = saveResult
+                this.setState({ board: newBoard })
+                break;
+            case 6:
+                newBoard = this.state.board
+                newBoard[5].source = saveResult
+                this.setState({ board: newBoard })
+                break;
+            case 7:
+                newBoard = this.state.board
+                newBoard[6].source = saveResult
+                this.setState({ board: newBoard })
+                break;
+            case 8:
+                newBoard = this.state.board
+                newBoard[7].source = saveResult
+                this.setState({ board: newBoard })
+                break;
+            case 9:
+                newBoard = this.state.board
+                newBoard[8].source = saveResult
+                this.setState({ board: newBoard })
+                break;
+        }
+
+        // if(this.state.currentSquare === 1){
+        //     const newBoard = this.state.board
+        //     newBoard[0].source = saveResult
+        //     this.setState({ board: newBoard });
+        // } else {
+        // this.setState({ cameraRollUri: saveResult });
+        // }
+        // this.setState({currentSquare: saveResult});
         console.log("pressed");
     }
     // =================================================================
@@ -131,8 +188,6 @@ export default class Home extends Component {
         } else {
 
             return (
-
-
                 // Try setting `flexDirection` to `column`.
                 <View style={styles.container}
                     collapsable={false}
@@ -141,61 +196,136 @@ export default class Home extends Component {
                     }} >
                     <View style={styles.board}>
                         <View style={styles.row}>
-                        {/* THIS IS SQUARE ONE */}
-                        {this.state.board[0].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }} 
-                            onPress={() => {
-                            this.setModalVisible(true);
-                            }}>
-                                <Image  source={{ uri: this.state.board[0].source}}
-                                        style={{ flex: 1 }}/>
+                            {/* THIS IS SQUARE ONE ================================================================================== */}
+                            {this.state.board[0].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }}
+                                onPress={() => {
+                                    this.setState({ currentSquare: 1 })
+                                    this.setModalVisible(true);
+                                }}>
+                                <Image source={{ uri: this.state.board[0].source }}
+                                    style={{ flex: 1 }} />
                             </TouchableHighlight>
-                        : <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }} 
-                        onPress={() => {
-                            this.setModalVisible(true);
-                            // this.state.board[0].source = this.state.cameraRollUri
-                            }}><Text>One</Text></TouchableHighlight> }
-                            {/* THIS IS SQUARE TWO */}
-                            {this.state.board[0].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }} 
-                            onPress={() => {
-                            this.setModalVisible(true);
-                            }}>
-                                <Image  source={{ uri: this.state.board[0].source}}
-                                        style={{ flex: 1 }}/>
+                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }}
+                                    onPress={() => {
+                                        this.setModalVisible(true);
+                                        this.setState({ currentSquare: 1 })
+                                    }}><Text>One</Text></TouchableHighlight>}
+                            {/* THIS IS SQUARE TWO ================================================================================== */}
+                            {this.state.board[1].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#FAA030' }}
+                                onPress={() => {
+                                    this.setModalVisible(true);
+                                    this.setState({ currentSquare: 2 })
+                                }}>
+                                <Image source={{ uri: this.state.board[1].source }}
+                                    style={{ flex: 1 }} />
                             </TouchableHighlight>
-                        : <TouchableHighlight style={{ flex: 1, backgroundColor: '#FAA030' }} 
-                        onPress={() => {
-                            this.setModalVisible(true);
-                            }}><Text>Two</Text></TouchableHighlight> }
-                             {/* THIS IS SQUARE THREE */}
-                            <View style={{ flex: 1, backgroundColor: '#32B76C' }} /> 
+                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#FAA030' }}
+                                    onPress={() => {
+                                        this.setModalVisible(true);
+                                        this.setState({ currentSquare: 2 })
+                                    }}><Text>Two</Text></TouchableHighlight>}
+                            {/* THIS IS SQUARE THREE ================================================================================== */}
+                            {this.state.board[2].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#32B76C' }}
+                                onPress={() => {
+                                    this.setModalVisible(true);
+                                    this.setState({ currentSquare: 3 })
+                                }}>
+                                <Image source={{ uri: this.state.board[2].source }}
+                                    style={{ flex: 1 }} />
+                            </TouchableHighlight>
+                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#32B76C' }}
+                                    onPress={() => {
+                                        this.setModalVisible(true);
+                                        this.setState({ currentSquare: 3 })
+                                    }}><Text>Three</Text></TouchableHighlight>}
                         </View>
                         <View style={styles.row}>
-                            <View style={{ flex: 1, backgroundColor: '#32B76C' }} />
-                            {this.state.cameraRollUri ?
-                                <Image
-                                    source={{ uri: this.state.cameraRollUri }}
-                                    style={{ flex: 1 }}
-                                /> : <View style={{ flex: 1, backgroundColor: '#EE2C38' }} />}
-                            <View style={{ flex: 1, backgroundColor: '#FAA030' }} />
+                            {/* THIS IS SQUARE FOUR ================================================================================== */}
+                            {this.state.board[3].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#FAA030' }}
+                                onPress={() => {
+                                    this.setState({ currentSquare: 4 })
+                                    this.setModalVisible(true);
+                                }}>
+                                <Image source={{ uri: this.state.board[3].source }}
+                                    style={{ flex: 1 }} />
+                            </TouchableHighlight>
+                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#FAA030' }}
+                                    onPress={() => {
+                                        this.setModalVisible(true);
+                                        this.setState({ currentSquare: 4 })
+                                    }}><Text>Four</Text></TouchableHighlight>}
+                            {/* THIS IS SQUARE FIVE ================================================================================== */}
+                            {this.state.board[4].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#32B76C' }}
+                                onPress={() => {
+                                    this.setState({ currentSquare: 5 })
+                                    this.setModalVisible(true);
+                                }}>
+                                <Image source={{ uri: this.state.board[4].source }}
+                                    style={{ flex: 1 }} />
+                            </TouchableHighlight>
+                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#32B76C' }}
+                                    onPress={() => {
+                                        this.setModalVisible(true);
+                                        this.setState({ currentSquare: 5 })
+                                    }}><Text>Five</Text></TouchableHighlight>}
+                            {/* THIS IS SQUARE SIX ================================================================================== */}
+                            {this.state.board[5].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }}
+                                onPress={() => {
+                                    this.setState({ currentSquare: 6 })
+                                    this.setModalVisible(true);
+                                }}>
+                                <Image source={{ uri: this.state.board[5].source }}
+                                    style={{ flex: 1 }} />
+                            </TouchableHighlight>
+                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }}
+                                    onPress={() => {
+                                        this.setModalVisible(true);
+                                        this.setState({ currentSquare: 6 })
+                                    }}><Text>Six</Text></TouchableHighlight>}
                         </View>
                         <View style={styles.row}>
-                            {/* <Camera
-                                style={{ flex: 1 }}
-                                ref={(ref) => { this.camera = ref }}
-                            >
-                                <View style={{ flex: 1 }}></View>
-
-                            </Camera> */}
-                            <View style={{ flex: 1, backgroundColor: '#EE2C38' }} />
-                            <View style={{ flex: 1, backgroundColor: '#FAA030' }} ><Text>save To Camera Roll Async</Text></View>
-                            <View style={{ flex: 1, backgroundColor: '#32B76C' }} >
-                                <Text>ImageClicker</Text>
-                                {/* <Button
-                                    title="Click On Me"
-                                    style={{ flex: 0, backgroundColor: 'red' }}
-                                    onPress={this.press.bind(this)}
-                                /> */}
-                            </View>
+                       {/* THIS IS SQUARE SEVEN ================================================================================== */}
+                       {this.state.board[6].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }}
+                                onPress={() => {
+                                    this.setState({ currentSquare: 7 })
+                                    this.setModalVisible(true);
+                                }}>
+                                <Image source={{ uri: this.state.board[6].source }}
+                                    style={{ flex: 1 }} />
+                            </TouchableHighlight>
+                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }}
+                                    onPress={() => {
+                                        this.setModalVisible(true);
+                                        this.setState({ currentSquare: 7 })
+                                    }}><Text>One</Text></TouchableHighlight>}
+                                     {/* THIS IS SQUARE EIGHT ================================================================================== */}
+                            {this.state.board[7].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#FAA030' }}
+                                onPress={() => {
+                                    this.setState({ currentSquare: 8 })
+                                    this.setModalVisible(true);
+                                }}>
+                                <Image source={{ uri: this.state.board[7].source }}
+                                    style={{ flex: 1 }} />
+                            </TouchableHighlight>
+                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#FAA030' }}
+                                    onPress={() => {
+                                        this.setModalVisible(true);
+                                        this.setState({ currentSquare: 8 })
+                                    }}><Text>Eight</Text></TouchableHighlight>}
+                                     {/* THIS IS SQUARE ONE ================================================================================== */}
+                            {this.state.board[8].source ? <TouchableHighlight style={{ flex: 1, backgroundColor: '#32B76C' }}
+                                onPress={() => {
+                                    this.setState({ currentSquare: 9 })
+                                    this.setModalVisible(true);
+                                }}>
+                                <Image source={{ uri: this.state.board[8].source }}
+                                    style={{ flex: 1 }} />
+                            </TouchableHighlight>
+                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#32B76C' }}
+                                    onPress={() => {
+                                        this.setModalVisible(true);
+                                        this.setState({ currentSquare: 9 })
+                                    }}><Text>Nine</Text></TouchableHighlight>}
                         </View>
                     </View>
                     <Modal
@@ -207,29 +337,31 @@ export default class Home extends Component {
                         }}>
                         <View style={styles.container}>
                             <View style={styles.board}>
-                                <Camera style={{ flex: 1 }} 
-                                    type={this.state.type} 
-                                    ref={ref => {this.camera = ref;
-                                }}>
-                                    <View
-                                        style={{
-                                            flex: 1,
-                                            backgroundColor: 'transparent',
-                                            flexDirection: 'row',
-                                        }} />
-                                    <TouchableHighlight
-                                        onPress={() => {
-                                            this.setModalVisible(!this.state.modalVisible);
+                                <View style={styles.row}>
+                                    <Camera style={styles.camera}
+                                        type={this.state.type}
+                                        ref={ref => {
+                                            this.camera = ref;
                                         }}>
-                                        <Text>Hide Modal</Text>
-                                    </TouchableHighlight>
-                                    <Button
-                                    title="Click On Me"
-                                    style={{ flex: 0, backgroundColor: 'red' }}
-                                    onPress={this.press.bind(this)}
-                                />
-                                </Camera>
-
+                                        <View
+                                            style={{
+                                                flex: 1,
+                                                backgroundColor: 'transparent',
+                                                flexDirection: 'row',
+                                            }} />
+                                        <TouchableHighlight
+                                            onPress={() => {
+                                                this.setModalVisible(!this.state.modalVisible);
+                                            }}>
+                                            <Text>Hide Modal</Text>
+                                        </TouchableHighlight>
+                                        <Button
+                                            title="Click On Me"
+                                            style={{ flex: 0, backgroundColor: 'red' }}
+                                            onPress={this.press.bind(this)}
+                                        />
+                                    </Camera>
+                                </View>
                             </View>
                         </View>
                     </Modal >
@@ -267,6 +399,9 @@ const styles = {
         //   marginLeft: 24,
         //   marginRight: 24,
         //   marginBottom: 24
+    },
+    camera: {
+        flex: 1,
     }
 }
 
