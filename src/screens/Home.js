@@ -7,6 +7,7 @@ import {
     Text,
     View,
     Image,
+    ImageBackground,
     TouchableOpacity,
     TextInput,
     ScrollView,
@@ -30,6 +31,7 @@ export default class Home extends Component {
         // source: null,
         anime,
         modalVisible: false,
+        modalConfirm: false,
         board: [{ name: 'One', source: null },
         { name: 'Two', source: null },
         { name: 'Three', source: null },
@@ -58,6 +60,44 @@ export default class Home extends Component {
         const { status } = await Permissions.askAsync(Permissions.CAMERA);
         this.setState({ hasCameraPermission: status === 'granted' });
     }
+
+    componentDidMount() {
+        let newBoard = null;
+        const active = true;
+        const challenges = []
+        console.log("Starting")
+        while (challenges.length < 9) {
+            let newChallenge = anime[Math.floor(Math.random() * anime.length)].anime
+            if (!challenges.includes(newChallenge)) {
+                challenges.push(newChallenge)
+                console.log(newChallenge)
+                console.log(challenges)
+            }
+        }
+
+
+        newBoard = this.state.board
+        for (let i = 0; i < challenges.length; i++) {
+            newBoard[i].name = challenges[i]
+        }
+        this.setState({ board: newBoard })
+        this.setState({ activeBoard: active })
+        // ============================================================================
+        // if(!this.state.activeBoard) {
+        //     for(let i = 0; i < 9; i++){
+        //     challenges.push(anime[Math.floor(Math.random() * anime.length)].anime)   
+        //     }
+        //     console.log(`New Board has: ${challenges}`)
+        //     newBoard = this.state.board
+        //     for(let i = 0; i < challenges.length; i++){
+        //         newBoard[i].name = challenges[i]
+        //     }
+        //     this.setState({ board: newBoard })
+        //     this.setState({ activeBoard: active })
+        // }
+    }
+
+
     // =================================================================
 
 
@@ -205,8 +245,8 @@ export default class Home extends Component {
                                     this.setState({ currentSquare: 1 })
                                     this.setModalVisible(true);
                                 }}>
-                                <Image source={{ uri: this.state.board[0].source }}
-                                    style={{ flex: 1 }} />
+                                <ImageBackground source={{ uri: this.state.board[0].source }}
+                                    style={{ flex: 1 }} ><Text>{this.state.board[0].name}</Text></ImageBackground>
                             </TouchableHighlight>
                                 : <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }}
                                     onPress={() => {
@@ -214,7 +254,7 @@ export default class Home extends Component {
                                         this.setState({ currentSquare: 1 })
                                     }}><Text>{this.state.board[0].name}</Text></TouchableHighlight>}
                             {/* THIS IS SQUARE TWO ================================================================================== */}
-                            {this.state.board[1].source ? <TouchableHighlight style={[styles.square, {backgroundColor: '#FAA030' }]}
+                            {this.state.board[1].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#FAA030' }]}
                                 onPress={() => {
                                     this.setModalVisible(true);
                                     this.setState({ currentSquare: 2 })
@@ -222,13 +262,13 @@ export default class Home extends Component {
                                 <Image source={{ uri: this.state.board[1].source }}
                                     style={{ flex: 1 }} />
                             </TouchableHighlight>
-                                : <TouchableHighlight style={{flex: 1, backgroundColor: '#FAA030' }}
+                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#FAA030' }}
                                     onPress={() => {
                                         this.setModalVisible(true);
                                         this.setState({ currentSquare: 2 })
                                     }}><Text>{this.state.board[1].name}</Text></TouchableHighlight>}
                             {/* THIS IS SQUARE THREE ================================================================================== */}
-                            {this.state.board[2].source ? <TouchableHighlight style={[styles.square, {backgroundColor: '#32B76C' }]}
+                            {this.state.board[2].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#32B76C' }]}
                                 onPress={() => {
                                     this.setModalVisible(true);
                                     this.setState({ currentSquare: 3 })
@@ -245,7 +285,7 @@ export default class Home extends Component {
                         <View style={styles.column}>
                             {/* THIS IS COLUMN ONE ================================================================================== */}
                             {/* THIS IS SQUARE FOUR ================================================================================== */}
-                            {this.state.board[3].source ? <TouchableHighlight style={[styles.square, {backgroundColor: '#FAA030' }]}
+                            {this.state.board[3].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#FAA030' }]}
                                 onPress={() => {
                                     this.setState({ currentSquare: 4 })
                                     this.setModalVisible(true);
@@ -259,7 +299,7 @@ export default class Home extends Component {
                                         this.setState({ currentSquare: 4 })
                                     }}><Text>{this.state.board[3].name}</Text></TouchableHighlight>}
                             {/* THIS IS SQUARE FIVE ================================================================================== */}
-                            {this.state.board[4].source ? <TouchableHighlight style={[styles.square, {backgroundColor: '#32B76C' }]}
+                            {this.state.board[4].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#32B76C' }]}
                                 onPress={() => {
                                     this.setState({ currentSquare: 5 })
                                     this.setModalVisible(true);
@@ -273,7 +313,7 @@ export default class Home extends Component {
                                         this.setState({ currentSquare: 5 })
                                     }}><Text>{this.state.board[4].name}</Text></TouchableHighlight>}
                             {/* THIS IS SQUARE SIX ================================================================================== */}
-                            {this.state.board[5].source ? <TouchableHighlight style={[styles.square, {backgroundColor: '#EE2C38' }]}
+                            {this.state.board[5].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#EE2C38' }]}
                                 onPress={() => {
                                     this.setState({ currentSquare: 6 })
                                     this.setModalVisible(true);
@@ -285,12 +325,12 @@ export default class Home extends Component {
                                     onPress={() => {
                                         this.setModalVisible(true);
                                         this.setState({ currentSquare: 6 })
-                                    }}><Text>{this.state.board[6].name}</Text></TouchableHighlight>}
+                                    }}><Text>{this.state.board[5].name}</Text></TouchableHighlight>}
                         </View>
                         <View style={styles.column}>
                             {/* THIS IS COLUMN ONE ================================================================================== */}
                             {/* THIS IS SQUARE SEVEN ================================================================================== */}
-                            {this.state.board[6].source ? <TouchableHighlight style={[styles.square, {backgroundColor: '#EE2C38' }]}
+                            {this.state.board[6].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#EE2C38' }]}
                                 onPress={() => {
                                     this.setState({ currentSquare: 7 })
                                     this.setModalVisible(true);
@@ -304,7 +344,7 @@ export default class Home extends Component {
                                         this.setState({ currentSquare: 7 })
                                     }}><Text>{this.state.board[6].name}</Text></TouchableHighlight>}
                             {/* THIS IS SQUARE EIGHT ================================================================================== */}
-                            {this.state.board[7].source ? <TouchableHighlight style={[styles.square, {backgroundColor: '#FAA030' }]}
+                            {this.state.board[7].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#FAA030' }]}
                                 onPress={() => {
                                     this.setState({ currentSquare: 8 })
                                     this.setModalVisible(true);
@@ -317,8 +357,8 @@ export default class Home extends Component {
                                         this.setModalVisible(true);
                                         this.setState({ currentSquare: 8 })
                                     }}><Text>{this.state.board[7].name}</Text></TouchableHighlight>}
-                            {/* THIS IS SQUARE ONE ================================================================================== */}
-                            {this.state.board[8].source ? <TouchableHighlight style={[styles.square, {backgroundColor: '#32B76C' }]}
+                            {/* THIS IS SQUARE NINE ================================================================================== */}
+                            {this.state.board[8].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#32B76C' }]}
                                 onPress={() => {
                                     this.setState({ currentSquare: 9 })
                                     this.setModalVisible(true);
@@ -376,7 +416,16 @@ export default class Home extends Component {
                                 </View>
                             </View>
                         </View>
-                    </Modal >
+                    </Modal>
+                    <Modal
+                        animationType="fade"
+                        transparent={false}
+                        visible={this.state.modalConfirm}
+                        onRequestClose={() => {
+                            alert('Modal has been closed.');
+                        }}>
+                        
+                    </Modal>
                 </View>
 
             );
