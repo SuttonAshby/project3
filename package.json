@@ -1,13 +1,9 @@
 {
-  "name": "project3",
-  "version": "0.1.0",
-  "private": true,
-  "devDependencies": {
-    "react-native-scripts": "1.14.0",
-    "jest-expo": "~27.0.0",
-    "react-test-renderer": "16.3.1"
-  },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
+  "private": true,
+  "jest": {
+    "preset": "jest-expo"
+  },
   "scripts": {
     "start": "react-native-scripts start",
     "eject": "react-native-scripts eject",
@@ -15,20 +11,17 @@
     "ios": "react-native-scripts ios",
     "test": "jest"
   },
-  "jest": {
-    "preset": "jest-expo"
-  },
   "dependencies": {
-    "expo": "^27.0.1",
-    "fb-watchman": "^2.0.0",
-    "firebase": "^5.2.0",
-    "react": "16.3.1",
-    "react-native": "~0.55.2",
-    "react-native-camera": "^1.1.4",
-    "react-native-firebase": "^4.2.0",
-    "react-navigation": "^2.5.5"
+    "@expo/samples": "2.1.1",
+    "expo": "^25.0.0",
+    "firebase": "^4.10.1",
+    "react": "16.2.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
+    "react-navigation": "^1.0.0-beta.27"
   },
-  "description": "This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).",
-  "author": "",
-  "license": "ISC"
+  "devDependencies": {
+    "react-native-scripts": "1.14.0",
+    "jest-expo": "~27.0.0",
+    "react-test-renderer": "16.3.1"
+  }
 }
