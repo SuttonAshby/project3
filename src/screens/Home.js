@@ -128,7 +128,7 @@ export default class Home extends Component {
                 newBoard[1].source = saveResult
                 this.setState({ board: newBoard })
                 break;
-            case 3:
+            case 3: 
                 newBoard = this.state.board
                 newBoard[2].source = saveResult
                 this.setState({ board: newBoard })
