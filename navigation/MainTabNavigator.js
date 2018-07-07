@@ -1,13 +1,13 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import Colors from '../constants/Colors';
 import TestScreen from '../screens/TestScreen';
 
 export default TabNavigator(
   {
-    Test: {
+    SnapCosPlay: {
       screen: TestScreen,
     },
   },
@@ -17,15 +17,15 @@ export default TabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         switch (routeName) {
-          case 'Test':
+          case 'SnapCosPlay':
             iconName =
               Platform.OS === 'ios'
-                ? `ios-information-circle${focused ? '' : '-outline'}`
+                ? `camera-retro`
                 : 'md-information-circle';
             break;
         }
         return (
-          <Ionicons
+          <FontAwesome
             name={iconName}
             size={28}
             style={{ marginBottom: -3 }}

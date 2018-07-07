@@ -1,32 +1,41 @@
-import React from 'react';
-import { ScrollView, TouchableOpacity, Modal, TouchableHighlight, CameraRoll, Image, StyleSheet, Text, View, TextInput, Button, Linking, Alert, } from 'react-native';
+import React, { Component } from 'react';
+
+import {
+    Button,
+    StyleSheet,
+    CameraRoll,
+    Text,
+    View,
+    Image,
+    ImageBackground,
+    TouchableOpacity,
+    TextInput,
+    ScrollView,
+    Modal,
+    TouchableHighlight
+} from 'react-native';
 import { TestComponent, PhoneButton } from './../components/AppComponents';
 import * as firebase from 'firebase';
 import { Camera, FileSystem, Permissions, Constants, takeSnapshotAsync, ImagePicker } from 'expo';
-// import anime from "../../anime.json";
+import anime from "../anime.json";
 // import Square from "../components/square";
 
 
-export default class TestScreen extends React.Component {
+export default class TestScreen extends Component {
     static navigationOptions = {
         header: null,
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            currentPassword: "",
-        };
-    }
-
     state = {
+        currentPassword: "",
         hasCameraPermission: null,
         type: Camera.Constants.Type.back,
         cameraRollUri: null,
         // image: null,
         // source: null,
-        // anime,
+        anime,
         modalVisible: false,
+        modalConfirm: false,
         board: [{ name: 'One', source: null },
         { name: 'Two', source: null },
         { name: 'Three', source: null },
@@ -53,6 +62,44 @@ export default class TestScreen extends React.Component {
         const { status } = await Permissions.askAsync(Permissions.CAMERA);
         this.setState({ hasCameraPermission: status === 'granted' });
     }
+
+    componentDidMount() {
+        let newBoard = null;
+        const active = true;
+        const challenges = []
+        console.log("Starting")
+        while (challenges.length < 9) {
+            let newChallenge = anime[Math.floor(Math.random() * anime.length)].anime
+            if (!challenges.includes(newChallenge)) {
+                challenges.push(newChallenge)
+                console.log(newChallenge)
+                console.log(challenges)
+            }
+        }
+
+
+        newBoard = this.state.board
+        for (let i = 0; i < challenges.length; i++) {
+            newBoard[i].name = challenges[i]
+        }
+        this.setState({ board: newBoard })
+        this.setState({ activeBoard: active })
+        // ============================================================================
+        // if(!this.state.activeBoard) {
+        //     for(let i = 0; i < 9; i++){
+        //     challenges.push(anime[Math.floor(Math.random() * anime.length)].anime)   
+        //     }
+        //     console.log(`New Board has: ${challenges}`)
+        //     newBoard = this.state.board
+        //     for(let i = 0; i < challenges.length; i++){
+        //         newBoard[i].name = challenges[i]
+        //     }
+        //     this.setState({ board: newBoard })
+        //     this.setState({ activeBoard: active })
+        // }
+    }
+
+
     // =================================================================
 
 
@@ -181,8 +228,8 @@ export default class TestScreen extends React.Component {
                                     this.setState({ currentSquare: 1 })
                                     this.setModalVisible(true);
                                 }}>
-                                <Image source={{ uri: this.state.board[0].source }}
-                                    style={{ flex: 1 }} />
+                                <ImageBackground source={{ uri: this.state.board[0].source }}
+                                    style={{ flex: 1 }} ><Text>{this.state.board[0].name}</Text></ImageBackground>
                             </TouchableHighlight>
                                 : <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }}
                                     onPress={() => {
@@ -261,7 +308,7 @@ export default class TestScreen extends React.Component {
                                     onPress={() => {
                                         this.setModalVisible(true);
                                         this.setState({ currentSquare: 6 })
-                                    }}><Text>{this.state.board[6].name}</Text></TouchableHighlight>}
+                                    }}><Text>{this.state.board[5].name}</Text></TouchableHighlight>}
                         </View>
                         <View style={styles.column}>
                             {/* THIS IS COLUMN ONE ================================================================================== */}
@@ -293,7 +340,7 @@ export default class TestScreen extends React.Component {
                                         this.setModalVisible(true);
                                         this.setState({ currentSquare: 8 })
                                     }}><Text>{this.state.board[7].name}</Text></TouchableHighlight>}
-                            {/* THIS IS SQUARE ONE ================================================================================== */}
+                            {/* THIS IS SQUARE NINE ================================================================================== */}
                             {this.state.board[8].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#32B76C' }]}
                                 onPress={() => {
                                     this.setState({ currentSquare: 9 })
@@ -309,6 +356,9 @@ export default class TestScreen extends React.Component {
                                     }}><Text>{this.state.board[8].name}</Text></TouchableHighlight>}
                         </View>
                     </View>
+                    {/* <View style={{ flex: 1, flexDirection: "column", paddingVertical: 50, paddingHorizontal: 10, }}>
+                        <Button title="Sign out" onPress={this.onSignoutPress} />
+                    </View> */}
                     <Modal
                         animationType="fade"
                         transparent={false}
@@ -352,7 +402,16 @@ export default class TestScreen extends React.Component {
                                 </View>
                             </View>
                         </View>
-                    </Modal >
+                    </Modal>
+                    <Modal
+                        animationType="fade"
+                        transparent={false}
+                        visible={this.state.modalConfirm}
+                        onRequestClose={() => {
+                            alert('Modal has been closed.');
+                        }}>
+
+                    </Modal>
                 </View>
 
             );
