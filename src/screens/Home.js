@@ -31,6 +31,7 @@ export default class Home extends Component {
         // source: null,
         anime,
         modalVisible: false,
+        modalConfirm: false,
         board: [{ name: 'One', source: null },
         { name: 'Two', source: null },
         { name: 'Three', source: null },
@@ -64,35 +65,37 @@ export default class Home extends Component {
         let newBoard = null;
         const active = true;
         const challenges = []
-    //     do{
-    //         let newChallenge = anime[Math.floor(Math.random() * anime.length)].anime
-    //         if (!challenges.includes(newChallenge)) {
-    //             challenges.push(newChallenge)
-    //             console.log(newChallenge)
-    //             console.log(challenges)
-    //         }
-    //     }
-    //     while (challenges.length < 9) 
-    
-    //     for(let i = 0; i < challenges.length; i++){
-    //         newBoard[i].name = challenges[i]
-    //     }
-    //     this.setState({ board: newBoard })
-    //     // this.setState({ activeBoard: active })
-    // }
-    if(!this.state.activeBoard) {
-        for(let i = 0; i < 9; i++){
-        challenges.push(anime[Math.floor(Math.random() * anime.length)].anime)   
+        console.log("Starting")
+        while (challenges.length < 9) {
+            let newChallenge = anime[Math.floor(Math.random() * anime.length)].anime
+            if (!challenges.includes(newChallenge)) {
+                challenges.push(newChallenge)
+                console.log(newChallenge)
+                console.log(challenges)
+            }
         }
-        console.log(`New Board has: ${challenges}`)
+
+
         newBoard = this.state.board
-        for(let i = 0; i < challenges.length; i++){
+        for (let i = 0; i < challenges.length; i++) {
             newBoard[i].name = challenges[i]
         }
         this.setState({ board: newBoard })
         this.setState({ activeBoard: active })
+        // ============================================================================
+        // if(!this.state.activeBoard) {
+        //     for(let i = 0; i < 9; i++){
+        //     challenges.push(anime[Math.floor(Math.random() * anime.length)].anime)   
+        //     }
+        //     console.log(`New Board has: ${challenges}`)
+        //     newBoard = this.state.board
+        //     for(let i = 0; i < challenges.length; i++){
+        //         newBoard[i].name = challenges[i]
+        //     }
+        //     this.setState({ board: newBoard })
+        //     this.setState({ activeBoard: active })
+        // }
     }
-}
 
 
     // =================================================================
@@ -322,7 +325,7 @@ export default class Home extends Component {
                                     onPress={() => {
                                         this.setModalVisible(true);
                                         this.setState({ currentSquare: 6 })
-                                    }}><Text>{this.state.board[6].name}</Text></TouchableHighlight>}
+                                    }}><Text>{this.state.board[5].name}</Text></TouchableHighlight>}
                         </View>
                         <View style={styles.column}>
                             {/* THIS IS COLUMN ONE ================================================================================== */}
@@ -354,7 +357,7 @@ export default class Home extends Component {
                                         this.setModalVisible(true);
                                         this.setState({ currentSquare: 8 })
                                     }}><Text>{this.state.board[7].name}</Text></TouchableHighlight>}
-                            {/* THIS IS SQUARE ONE ================================================================================== */}
+                            {/* THIS IS SQUARE NINE ================================================================================== */}
                             {this.state.board[8].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#32B76C' }]}
                                 onPress={() => {
                                     this.setState({ currentSquare: 9 })
@@ -413,7 +416,16 @@ export default class Home extends Component {
                                 </View>
                             </View>
                         </View>
-                    </Modal >
+                    </Modal>
+                    <Modal
+                        animationType="fade"
+                        transparent={false}
+                        visible={this.state.modalConfirm}
+                        onRequestClose={() => {
+                            alert('Modal has been closed.');
+                        }}>
+                        
+                    </Modal>
                 </View>
 
             );
