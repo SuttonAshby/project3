@@ -31,6 +31,7 @@ export default class Home extends Component {
         // source: null,
         anime,
         modalVisible: false,
+        cameraModal: false,
         modalConfirm: false,
         board: [{ name: 'One', source: null },
         { name: 'Two', source: null },
@@ -62,6 +63,9 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
+        // if (!this.state.activeBoard) {
+        //     this.generateBoard()
+        // }
         let newBoard = null;
         const active = true;
         const challenges = []
@@ -70,32 +74,34 @@ export default class Home extends Component {
             let newChallenge = anime[Math.floor(Math.random() * anime.length)].anime
             if (!challenges.includes(newChallenge)) {
                 challenges.push(newChallenge)
-                console.log(newChallenge)
-                console.log(challenges)
             }
         }
-
-
         newBoard = this.state.board
         for (let i = 0; i < challenges.length; i++) {
             newBoard[i].name = challenges[i]
         }
         this.setState({ board: newBoard })
         this.setState({ activeBoard: active })
-        // ============================================================================
-        // if(!this.state.activeBoard) {
-        //     for(let i = 0; i < 9; i++){
-        //     challenges.push(anime[Math.floor(Math.random() * anime.length)].anime)   
-        //     }
-        //     console.log(`New Board has: ${challenges}`)
-        //     newBoard = this.state.board
-        //     for(let i = 0; i < challenges.length; i++){
-        //         newBoard[i].name = challenges[i]
-        //     }
-        //     this.setState({ board: newBoard })
-        //     this.setState({ activeBoard: active })
-        // }
     }
+
+    // generateBoard() {
+    //     let newBoard = null;
+    //     const active = true;
+    //     const challenges = []
+    //     console.log("Starting")
+    //     while (challenges.length < 9) {
+    //         let newChallenge = anime[Math.floor(Math.random() * anime.length)].anime
+    //         if (!challenges.includes(newChallenge)) {
+    //             challenges.push(newChallenge)
+    //         }
+    //     }
+    //     newBoard = this.state.board
+    //     for (let i = 0; i < challenges.length; i++) {
+    //         newBoard[i].name = challenges[i]
+    //     }
+    //     this.setState({ board: newBoard })
+    //     this.setState({ activeBoard: active })
+    // }
 
 
     // =================================================================
@@ -139,6 +145,10 @@ export default class Home extends Component {
     //   }
     // };
     // =================================================================
+
+    // setModalVisible(visible) {
+    //     this.setState({ modalVisible: visible });
+    // }
 
     setModalVisible(visible) {
         this.setState({ modalVisible: visible });
@@ -424,7 +434,13 @@ export default class Home extends Component {
                         onRequestClose={() => {
                             alert('Modal has been closed.');
                         }}>
-                        
+                        <Button
+                            title="Back"
+                            style={{ flex: 0, backgroundColor: 'red' }}
+                            onPress={() => {
+                                this.setModalVisible(!this.state.modalVisible);
+                            }}
+                        />
                     </Modal>
                 </View>
 
