@@ -397,6 +397,7 @@ export default class TestScreen extends Component {
                                     //     this.setState({currentSource: null})
                                     // }} /></ImageBackground>
                                     //Testing absolute fill view =========================================================
+                                    //Working sample of creating own imagebackground
                                     <View style={ {flex: 1}}>
                                      <Image source={{ uri: this.state.currentSource }}
                                     style={[ styles.imageCheck, StyleSheet.absoluteFill]} />
