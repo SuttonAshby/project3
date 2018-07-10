@@ -32,11 +32,9 @@ export default class TestScreen extends Component {
         type: Camera.Constants.Type.back,
         cameraRollUri: null,
         // image: null,
-        // source: null,
+        currentSource: null,
         anime,
         modalVisible: false,
-        cameraModal: false,
-        modalConfirm: false,
         board: [{ name: 'One', source: null },
         { name: 'Two', source: null },
         { name: 'Three', source: null },
@@ -133,12 +131,15 @@ export default class TestScreen extends Component {
 
         console.log('Button Pressed');
         //Toggle Modal
-        this.setModalVisible(!this.state.modalVisible)
+        // this.setModalVisible(!this.state.modalVisible)
+
 
         console.log('Taking photo');
         let photo = await this.camera.takePictureAsync({ base64: true, exif: true });
 
         let saveResult = await CameraRoll.saveToCameraRoll(photo.uri, 'photo');
+
+        this.setState({ currentSource: saveResult })
 
         let newBoard = null;
         switch (this.state.currentSquare) {
@@ -379,59 +380,71 @@ export default class TestScreen extends Component {
                         <View style={styles.container}>
                             <View style={styles.board}>
                                 <View style={styles.column}>
-                                    <Camera style={styles.camera}
-                                        type={this.state.type}
-                                        ref={ref => {
-                                            this.camera = ref;
-                                        }}>
-                                        <View
-                                            style={{
-                                                flex: 1,
-                                                backgroundColor: 'transparent',
-                                                flexDirection: 'row',
-                                            }} />
-                                        {/* <TouchableHighlight
-                                            onPress={() => {
-                                                this.setModalVisible(!this.state.modalVisible);
+                                    {this.state.currentSource ? 
+                                    // <ImageBackground source={{ uri: this.state.currentSource }}
+                                    //     style={styles.imageCheck} > 
+                                    //     <Button
+                                    //     title="Retake"
+                                    //     style={{ flex: 0, backgroundColor: 'red' }}
+                                    //     onPress={() => {
+                                    //         this.setState({currentSource: null});
+                                    //     }}/> 
+                                    // <Button
+                                    // title="Keep"
+                                    // style={{ flex: 0, backgroundColor: 'red' }}
+                                    // onPress={() => {
+                                    //     this.setModalVisible(!this.state.modalVisible);
+                                    //     this.setState({currentSource: null})
+                                    // }} /></ImageBackground>
+                                    //Testing absolute fill view =========================================================
+                                    <View style={ {flex: 1}}>
+                                     <Image source={{ uri: this.state.currentSource }}
+                                    style={[ styles.imageCheck, StyleSheet.absoluteFill]} />
+                                     <Button
+                                        title="Retake"
+                                        style={{ flex: 0, backgroundColor: 'red' }}
+                                        onPress={() => {
+                                            this.setState({currentSource: null});
+                                        }}/> 
+                                    <Button
+                                    title="Keep"
+                                    style={{ flex: 0, backgroundColor: 'red' }}
+                                    onPress={() => {
+                                        this.setModalVisible(!this.state.modalVisible);
+                                        this.setState({currentSource: null})
+                                    }} />
+                                    </View>
+                                 : 
+                                 <Camera style={styles.camera}
+                                            type={this.state.type}
+                                            ref={ref => {
+                                                this.camera = ref;
                                             }}>
-                                            <Text>Hide Modal</Text>
-                                        </TouchableHighlight> */}
-                                        <Button
-                                            title="Snap"
-                                            style={{ flex: 0, backgroundColor: 'red' }}
-                                            onPress={this.press.bind(this)}
-                                        />
-                                        <Button
-                                            title="Back"
-                                            style={{ flex: 0, backgroundColor: 'red' }}
-                                            onPress={() => {
-                                                this.setModalVisible(!this.state.modalVisible);
-                                            }}
-                                        />
-                                    </Camera>
+                                            <View
+                                                style={{
+                                                    flex: 1,
+                                                    backgroundColor: 'transparent',
+                                                    flexDirection: 'row',
+                                                }} />
+                                            <Button
+                                                title="Snap"
+                                                style={{ flex: 0, backgroundColor: 'red' }}
+                                                onPress={this.press.bind(this)}
+                                            />
+                                            <Button
+                                                title="Back"
+                                                style={{ flex: 0, backgroundColor: 'red' }}
+                                                onPress={() => {
+                                                    this.setModalVisible(!this.state.modalVisible);
+                                                }}
+                                            />
+                                        </Camera>}
                                 </View>
                             </View>
                         </View>
                     </Modal>
-                    <Modal
-                        animationType="fade"
-                        transparent={false}
-                        visible={this.state.modalConfirm}
-                        onRequestClose={() => {
-                            alert('Modal has been closed.');
-                        }}>
-                        <Button
-                            title="Back"
-                            style={{ flex: 0, backgroundColor: 'red' }}
-                            onPress={() => {
-                                this.setModalVisible(!this.state.modalVisible);
-                            }}
-                        />
-                    </Modal>
                 </View>
-
             );
-
         }
     }
 
@@ -470,6 +483,10 @@ const styles = {
     },
     camera: {
         flex: 1,
+    },
+    imageCheck:{
+        flex: 1,
+        transform: [{ rotate: '90deg' }]
     }
 }
 //     return (
