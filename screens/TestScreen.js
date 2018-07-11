@@ -18,7 +18,7 @@ import { TestComponent, PhoneButton } from './../components/AppComponents';
 import * as firebase from 'firebase';
 import { Camera, FileSystem, Permissions, Constants, takeSnapshotAsync, ImagePicker } from 'expo';
 import anime from "../anime.json";
-// import Square from "../components/square";
+import { Square } from './../components/AppComponents';
 
 
 export default class TestScreen extends Component {
@@ -216,6 +216,11 @@ export default class TestScreen extends Component {
         return user.reauthenticateWithCredential(cred);
     }
 
+    pullUpCamera = (id) => {
+        this.setModalVisible(true);
+        this.setState({ currentSquare: id })
+    }
+
 
     render() {
         let { hasCameraPermission, image } = this.state;
@@ -237,7 +242,7 @@ export default class TestScreen extends Component {
                         <View style={styles.column}>
                             {/* THIS IS COLUMN ONE ================================================================================== */}
                             {/* THIS IS SQUARE ONE ================================================================================== */}
-                            {this.state.board[0].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#EE2C38' }]}
+                            {/* {this.state.board[0].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#EE2C38' }]}
                                 onPress={() => {
                                     this.setState({ currentSquare: 1 })
                                     this.setModalVisible(true);
@@ -249,7 +254,11 @@ export default class TestScreen extends Component {
                                     onPress={() => {
                                         this.setModalVisible(true);
                                         this.setState({ currentSquare: 1 })
-                                    }}><Text>{this.state.board[0].name}</Text></TouchableHighlight>}
+                                    }}><Text>{this.state.board[0].name}</Text></TouchableHighlight>} */}
+                            <Square onPress={()=>{this.pullUpCamera(1)}} 
+                                source={this.state.board[0].source} 
+                                name={this.state.board[0].name} 
+                                color={"#EE2C38"}/>
                             {/* THIS IS SQUARE TWO ================================================================================== */}
                             {this.state.board[1].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#FAA030' }]}
                                 onPress={() => {
@@ -384,41 +393,6 @@ export default class TestScreen extends Component {
                             <View style={styles.board}>
                                 <View style={styles.column}>
                                     {this.state.currentSource ?
-                                        // <ImageBackground source={{ uri: this.state.currentSource }}
-                                        //     style={styles.imageCheck} > 
-                                        //     <Button
-                                        //     title="Retake"
-                                        //     style={{ flex: 0, backgroundColor: 'red' }}
-                                        //     onPress={() => {
-                                        //         this.setState({currentSource: null});
-                                        //     }}/> 
-                                        // <Button
-                                        // title="Keep"
-                                        // style={{ flex: 0, backgroundColor: 'red' }}
-                                        // onPress={() => {
-                                        //     this.setModalVisible(!this.state.modalVisible);
-                                        //     this.setState({currentSource: null})
-                                        // }} /></ImageBackground>
-                                        //Testing absolute fill view =========================================================
-                                        //Working sample of creating own imagebackground
-                                        // <View style={{ flex: 1 }}>
-                                        //     <Image source={{ uri: this.state.currentSource }}
-                                        //         style={[styles.imageCheck, StyleSheet.absoluteFill]} />
-                                        //     <Button
-                                        //         title="Retake"
-                                        //         style={{ flex: 0, backgroundColor: 'red' }}
-                                        //         onPress={() => {
-                                        //             this.setState({ currentSource: null });
-                                        //         }} />
-                                        //     <Button
-                                        //         title="Keep"
-                                        //         style={{ flex: 0, backgroundColor: 'red' }}
-                                        //         onPress={() => {
-                                        //             this.setModalVisible(!this.state.modalVisible);
-                                        //             this.setState({ currentSource: null })
-                                        //         }} />
-                                        // </View>
-                                        //====================================================================================
                                         <ImageBackground source={{ uri: this.state.currentSource }}
                                             style={{ flex: 1 }}> 
                                             <Button
