@@ -63,9 +63,30 @@ export default class TestScreen extends Component {
     }
 
     componentDidMount() {
-        // if (!this.state.activeBoard) {
-        //     this.generateBoard()
+        if (!this.state.activeBoard) {
+            this.generateBoard()
+        }
+        //Lock screen orientation
+        Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP);
+        // let newBoard = null;
+        // const active = true;
+        // const challenges = []
+        // console.log("Starting")
+        // while (challenges.length < 9) {
+        //     let newChallenge = anime[Math.floor(Math.random() * anime.length)].anime
+        //     if (!challenges.includes(newChallenge)) {
+        //         challenges.push(newChallenge)
+        //     }
         // }
+        // newBoard = this.state.board
+        // for (let i = 0; i < challenges.length; i++) {
+        //     newBoard[i].name = challenges[i]
+        // }
+        // this.setState({ board: newBoard })
+        // this.setState({ activeBoard: active })
+    }
+
+    generateBoard() {
         let newBoard = null;
         const active = true;
         const challenges = []
@@ -83,25 +104,6 @@ export default class TestScreen extends Component {
         this.setState({ board: newBoard })
         this.setState({ activeBoard: active })
     }
-
-    // generateBoard() {
-    //     let newBoard = null;
-    //     const active = true;
-    //     const challenges = []
-    //     console.log("Starting")
-    //     while (challenges.length < 9) {
-    //         let newChallenge = anime[Math.floor(Math.random() * anime.length)].anime
-    //         if (!challenges.includes(newChallenge)) {
-    //             challenges.push(newChallenge)
-    //         }
-    //     }
-    //     newBoard = this.state.board
-    //     for (let i = 0; i < challenges.length; i++) {
-    //         newBoard[i].name = challenges[i]
-    //     }
-    //     this.setState({ board: newBoard })
-    //     this.setState({ activeBoard: active })
-    // }
 
 
     // =================================================================
@@ -135,7 +137,7 @@ export default class TestScreen extends Component {
 
 
         console.log('Taking photo');
-        let photo = await this.camera.takePictureAsync({ base64: true, exif: true });
+        let photo = await this.camera.takePictureAsync({ base64: false, exif: false });
 
         let saveResult = await CameraRoll.saveToCameraRoll(photo.uri, 'photo');
 
@@ -242,7 +244,7 @@ export default class TestScreen extends Component {
                                 <ImageBackground source={{ uri: this.state.board[0].source }}
                                     style={{ flex: 1 }} ><Text>{this.state.board[0].name}</Text></ImageBackground>
                             </TouchableHighlight>
-                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }}
+                                : <TouchableHighlight style={[styles.square, { backgroundColor: '#EE2C38' }]}
                                     onPress={() => {
                                         this.setModalVisible(true);
                                         this.setState({ currentSquare: 1 })
@@ -380,43 +382,43 @@ export default class TestScreen extends Component {
                         <View style={styles.container}>
                             <View style={styles.board}>
                                 <View style={styles.column}>
-                                    {this.state.currentSource ? 
-                                    // <ImageBackground source={{ uri: this.state.currentSource }}
-                                    //     style={styles.imageCheck} > 
-                                    //     <Button
-                                    //     title="Retake"
-                                    //     style={{ flex: 0, backgroundColor: 'red' }}
-                                    //     onPress={() => {
-                                    //         this.setState({currentSource: null});
-                                    //     }}/> 
-                                    // <Button
-                                    // title="Keep"
-                                    // style={{ flex: 0, backgroundColor: 'red' }}
-                                    // onPress={() => {
-                                    //     this.setModalVisible(!this.state.modalVisible);
-                                    //     this.setState({currentSource: null})
-                                    // }} /></ImageBackground>
-                                    //Testing absolute fill view =========================================================
-                                    //Working sample of creating own imagebackground
-                                    <View style={ {flex: 1}}>
-                                     <Image source={{ uri: this.state.currentSource }}
-                                    style={[ styles.imageCheck, StyleSheet.absoluteFill]} />
-                                     <Button
-                                        title="Retake"
-                                        style={{ flex: 0, backgroundColor: 'red' }}
-                                        onPress={() => {
-                                            this.setState({currentSource: null});
-                                        }}/> 
-                                    <Button
-                                    title="Keep"
-                                    style={{ flex: 0, backgroundColor: 'red' }}
-                                    onPress={() => {
-                                        this.setModalVisible(!this.state.modalVisible);
-                                        this.setState({currentSource: null})
-                                    }} />
-                                    </View>
-                                 : 
-                                 <Camera style={styles.camera}
+                                    {this.state.currentSource ?
+                                        // <ImageBackground source={{ uri: this.state.currentSource }}
+                                        //     style={styles.imageCheck} > 
+                                        //     <Button
+                                        //     title="Retake"
+                                        //     style={{ flex: 0, backgroundColor: 'red' }}
+                                        //     onPress={() => {
+                                        //         this.setState({currentSource: null});
+                                        //     }}/> 
+                                        // <Button
+                                        // title="Keep"
+                                        // style={{ flex: 0, backgroundColor: 'red' }}
+                                        // onPress={() => {
+                                        //     this.setModalVisible(!this.state.modalVisible);
+                                        //     this.setState({currentSource: null})
+                                        // }} /></ImageBackground>
+                                        //Testing absolute fill view =========================================================
+                                        //Working sample of creating own imagebackground
+                                        <View style={{ flex: 1 }}>
+                                            <Image source={{ uri: this.state.currentSource }}
+                                                style={[styles.imageCheck, StyleSheet.absoluteFill]} />
+                                            <Button
+                                                title="Retake"
+                                                style={{ flex: 0, backgroundColor: 'red' }}
+                                                onPress={() => {
+                                                    this.setState({ currentSource: null });
+                                                }} />
+                                            <Button
+                                                title="Keep"
+                                                style={{ flex: 0, backgroundColor: 'red' }}
+                                                onPress={() => {
+                                                    this.setModalVisible(!this.state.modalVisible);
+                                                    this.setState({ currentSource: null })
+                                                }} />
+                                        </View>
+                                        :
+                                        <Camera style={styles.camera}
                                             type={this.state.type}
                                             ref={ref => {
                                                 this.camera = ref;
@@ -439,6 +441,17 @@ export default class TestScreen extends Component {
                                                     this.setModalVisible(!this.state.modalVisible);
                                                 }}
                                             />
+                                            <Button
+                                                title="Flip"
+                                                style={{ flex: 0, backgroundColor: 'red' }}
+                                                onPress={() => {
+                                                    this.setState({
+                                                        type: this.state.type === Camera.Constants.Type.back
+                                                          ? Camera.Constants.Type.front
+                                                          : Camera.Constants.Type.back,
+                                                      })
+                                                }}
+                                            />
                                         </Camera>}
                                 </View>
                             </View>
@@ -458,6 +471,7 @@ const styles = {
         //   height: 200,
         flexDirection: 'row',
         flex: 1,
+        backgroundColor: 'black'
         // aspectRatio: 1,
         // justifyContent: 'center',
         // alignItems: 'center',
@@ -479,15 +493,22 @@ const styles = {
     },
     square: {
         flex: 1,
-        transform: [{ rotate: '90deg' }]
+        transform: [{ rotate: '90deg' }],
+
         //TODO: fix camera orientation
     },
     camera: {
         flex: 1,
     },
-    imageCheck:{
+    imageCheck: {
         flex: 1,
         transform: [{ rotate: '90deg' }]
+    },
+    emptySquare:{
+
+    },
+    photoSquare: {
+
     }
 }
 //     return (
