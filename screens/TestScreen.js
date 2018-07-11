@@ -240,143 +240,48 @@ export default class TestScreen extends Component {
                     }} >
                     <View style={styles.board}>
                         <View style={styles.column}>
-                            {/* THIS IS COLUMN ONE ================================================================================== */}
-                            {/* THIS IS SQUARE ONE ================================================================================== */}
-                            {/* {this.state.board[0].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#EE2C38' }]}
-                                onPress={() => {
-                                    this.setState({ currentSquare: 1 })
-                                    this.setModalVisible(true);
-                                }}>
-                                <ImageBackground source={{ uri: this.state.board[0].source }}
-                                    style={{ flex: 1 }} ><Text>{this.state.board[0].name}</Text></ImageBackground>
-                            </TouchableHighlight>
-                                : <TouchableHighlight style={[styles.square, { backgroundColor: '#EE2C38' }]}
-                                    onPress={() => {
-                                        this.setModalVisible(true);
-                                        this.setState({ currentSquare: 1 })
-                                    }}><Text>{this.state.board[0].name}</Text></TouchableHighlight>} */}
-                            <Square onPress={()=>{this.pullUpCamera(1)}} 
+                            <Square onPress={()=>{this.pullUpCamera(1)}} //SQUARE ONE
                                 source={this.state.board[0].source} 
                                 name={this.state.board[0].name} 
                                 color={"#EE2C38"}/>
-                            {/* THIS IS SQUARE TWO ================================================================================== */}
-                            {this.state.board[1].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#FAA030' }]}
-                                onPress={() => {
-                                    this.setModalVisible(true);
-                                    this.setState({ currentSquare: 2 })
-                                }}>
-                                <Image source={{ uri: this.state.board[1].source }}
-                                    style={{ flex: 1 }} />
-                            </TouchableHighlight>
-                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#FAA030' }}
-                                    onPress={() => {
-                                        this.setModalVisible(true);
-                                        this.setState({ currentSquare: 2 })
-                                    }}><Text>{this.state.board[1].name}</Text></TouchableHighlight>}
-                            {/* THIS IS SQUARE THREE ================================================================================== */}
-                            {this.state.board[2].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#32B76C' }]}
-                                onPress={() => {
-                                    this.setModalVisible(true);
-                                    this.setState({ currentSquare: 3 })
-                                }}>
-                                <Image source={{ uri: this.state.board[2].source }}
-                                    style={{ flex: 1 }} />
-                            </TouchableHighlight>
-                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#32B76C' }}
-                                    onPress={() => {
-                                        this.setModalVisible(true);
-                                        this.setState({ currentSquare: 3 })
-                                    }}><Text>{this.state.board[2].name}</Text></TouchableHighlight>}
+                            <Square onPress={()=>{this.pullUpCamera(2)}} //SQUARE TWO
+                                source={this.state.board[1].source} 
+                                name={this.state.board[1].name} 
+                                color={"#FAA030"}/>
+                            <Square onPress={()=>{this.pullUpCamera(3)}} //SQUARE THREE
+                                source={this.state.board[2].source} 
+                                name={this.state.board[2].name} 
+                                color={"#32B76C"}/>
                         </View>
                         <View style={styles.column}>
-                            {/* THIS IS COLUMN ONE ================================================================================== */}
-                            {/* THIS IS SQUARE FOUR ================================================================================== */}
-                            {this.state.board[3].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#FAA030' }]}
-                                onPress={() => {
-                                    this.setState({ currentSquare: 4 })
-                                    this.setModalVisible(true);
-                                }}>
-                                <Image source={{ uri: this.state.board[3].source }}
-                                    style={{ flex: 1 }} />
-                            </TouchableHighlight>
-                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#FAA030' }}
-                                    onPress={() => {
-                                        this.setModalVisible(true);
-                                        this.setState({ currentSquare: 4 })
-                                    }}><Text>{this.state.board[3].name}</Text></TouchableHighlight>}
-                            {/* THIS IS SQUARE FIVE ================================================================================== */}
-                            {this.state.board[4].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#32B76C' }]}
-                                onPress={() => {
-                                    this.setState({ currentSquare: 5 })
-                                    this.setModalVisible(true);
-                                }}>
-                                <Image source={{ uri: this.state.board[4].source }}
-                                    style={{ flex: 1 }} />
-                            </TouchableHighlight>
-                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#32B76C' }}
-                                    onPress={() => {
-                                        this.setModalVisible(true);
-                                        this.setState({ currentSquare: 5 })
-                                    }}><Text>{this.state.board[4].name}</Text></TouchableHighlight>}
-                            {/* THIS IS SQUARE SIX ================================================================================== */}
-                            {this.state.board[5].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#EE2C38' }]}
-                                onPress={() => {
-                                    this.setState({ currentSquare: 6 })
-                                    this.setModalVisible(true);
-                                }}>
-                                <Image source={{ uri: this.state.board[5].source }}
-                                    style={{ flex: 1 }} />
-                            </TouchableHighlight>
-                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }}
-                                    onPress={() => {
-                                        this.setModalVisible(true);
-                                        this.setState({ currentSquare: 6 })
-                                    }}><Text>{this.state.board[5].name}</Text></TouchableHighlight>}
+                            {/* THIS IS COLUMN TWO ================================================================================== */}
+                            <Square onPress={()=>{this.pullUpCamera(4)}} //SQUARE FOUR
+                                source={this.state.board[3].source} 
+                                name={this.state.board[3].name} 
+                                color={"#FAA030"}/>
+                            <Square onPress={()=>{this.pullUpCamera(5)}} //SQUARE FIVE
+                                source={this.state.board[4].source} 
+                                name={this.state.board[4].name} 
+                                color={"#32B76C"}/>
+                            <Square onPress={()=>{this.pullUpCamera(6)}} //SQUARE SIX
+                                source={this.state.board[5].source} 
+                                name={this.state.board[5].name} 
+                                color={"#EE2C38"}/>
                         </View>
                         <View style={styles.column}>
-                            {/* THIS IS COLUMN ONE ================================================================================== */}
-                            {/* THIS IS SQUARE SEVEN ================================================================================== */}
-                            {this.state.board[6].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#EE2C38' }]}
-                                onPress={() => {
-                                    this.setState({ currentSquare: 7 })
-                                    this.setModalVisible(true);
-                                }}>
-                                <Image source={{ uri: this.state.board[6].source }}
-                                    style={{ flex: 1 }} />
-                            </TouchableHighlight>
-                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#EE2C38' }}
-                                    onPress={() => {
-                                        this.setModalVisible(true);
-                                        this.setState({ currentSquare: 7 })
-                                    }}><Text>{this.state.board[6].name}</Text></TouchableHighlight>}
-                            {/* THIS IS SQUARE EIGHT ================================================================================== */}
-                            {this.state.board[7].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#FAA030' }]}
-                                onPress={() => {
-                                    this.setState({ currentSquare: 8 })
-                                    this.setModalVisible(true);
-                                }}>
-                                <Image source={{ uri: this.state.board[7].source }}
-                                    style={{ flex: 1 }} />
-                            </TouchableHighlight>
-                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#FAA030' }}
-                                    onPress={() => {
-                                        this.setModalVisible(true);
-                                        this.setState({ currentSquare: 8 })
-                                    }}><Text>{this.state.board[7].name}</Text></TouchableHighlight>}
-                            {/* THIS IS SQUARE NINE ================================================================================== */}
-                            {this.state.board[8].source ? <TouchableHighlight style={[styles.square, { backgroundColor: '#32B76C' }]}
-                                onPress={() => {
-                                    this.setState({ currentSquare: 9 })
-                                    this.setModalVisible(true);
-                                }}>
-                                <Image source={{ uri: this.state.board[8].source }}
-                                    style={{ flex: 1 }} />
-                            </TouchableHighlight>
-                                : <TouchableHighlight style={{ flex: 1, backgroundColor: '#32B76C' }}
-                                    onPress={() => {
-                                        this.setModalVisible(true);
-                                        this.setState({ currentSquare: 9 })
-                                    }}><Text>{this.state.board[8].name}</Text></TouchableHighlight>}
+                            {/* THIS IS COLUMN THREE ================================================================================== */}
+                            <Square onPress={()=>{this.pullUpCamera(7)}} //SQUARE SEVEN
+                                source={this.state.board[6].source} 
+                                name={this.state.board[6].name} 
+                                color={"#EE2C38"}/>
+                            <Square onPress={()=>{this.pullUpCamera(8)}} //SQUARE EIGHT
+                                source={this.state.board[7].source} 
+                                name={this.state.board[7].name} 
+                                color={"#FAA030"}/>
+                            <Square onPress={()=>{this.pullUpCamera(9)}} //SQUARE NINE
+                                source={this.state.board[8].source} 
+                                name={this.state.board[8].name} 
+                                color={"#32B76C"}/>
                         </View>
                     </View>
                     {/* <View style={{ flex: 1, flexDirection: "column", paddingVertical: 50, paddingHorizontal: 10, }}>
