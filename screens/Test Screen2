@@ -64,7 +64,6 @@ export default class TestScreen extends Component {
     }
 
     componentDidMount() {
-        Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP);
         let newBoard = null;
         const active = true;
         const challenges = []
@@ -77,6 +76,7 @@ export default class TestScreen extends Component {
                 console.log(challenges)
             }
         }
+
 
         newBoard = this.state.board
         for (let i = 0; i < challenges.length; i++) {
@@ -127,53 +127,54 @@ export default class TestScreen extends Component {
 
         console.log('Taking photo');
         let photo = await this.camera.takePictureAsync({ base64: true, exif: true });
-        //let saveResult = await CameraRoll.saveToCameraRoll(photo.uri, 'photo');
+
+        let saveResult = await CameraRoll.saveToCameraRoll(photo.uri, 'photo');
 
         let newBoard = null;
         switch (this.state.currentSquare) {
             case 1:
                 newBoard = this.state.board
-                newBoard[0].source = photo.uri
+                newBoard[0].source = saveResult
                 this.setState({ board: newBoard })
                 break;
             case 2:
                 newBoard = this.state.board
-                newBoard[1].source = photo.uri
+                newBoard[1].source = saveResult
                 this.setState({ board: newBoard })
                 break;
             case 3:
                 newBoard = this.state.board
-                newBoard[2].source = photo.uri
+                newBoard[2].source = saveResult
                 this.setState({ board: newBoard })
                 break;
             case 4:
                 newBoard = this.state.board
-                newBoard[3].source = photo.uri
+                newBoard[3].source = saveResult
                 this.setState({ board: newBoard })
                 break;
             case 5:
                 newBoard = this.state.board
-                newBoard[4].source = photo.uri
+                newBoard[4].source = saveResult
                 this.setState({ board: newBoard })
                 break;
             case 6:
                 newBoard = this.state.board
-                newBoard[5].source = photo.uri
+                newBoard[5].source = saveResult
                 this.setState({ board: newBoard })
                 break;
             case 7:
                 newBoard = this.state.board
-                newBoard[6].source = photo.uri
+                newBoard[6].source = saveResult
                 this.setState({ board: newBoard })
                 break;
             case 8:
                 newBoard = this.state.board
-                newBoard[7].source = photo.uri
+                newBoard[7].source = saveResult
                 this.setState({ board: newBoard })
                 break;
             case 9:
                 newBoard = this.state.board
-                newBoard[8].source = photo.uri
+                newBoard[8].source = saveResult
                 this.setState({ board: newBoard })
                 break;
         }
@@ -407,9 +408,6 @@ export default class TestScreen extends Component {
                             alert('Modal has been closed.');
                         }}>
                     </Modal>
-                    <View style={styles.buttonRow}>
-                        <Button title="Sign out" onPress={this.onSignoutPress} />
-                    </View>
                 </View>
 
             );
@@ -422,37 +420,32 @@ export default class TestScreen extends Component {
 const styles = {
     container: {
         marginTop: 48,
-        flexDirection: 'column',
+        //   width: 200,
+        //   height: 200,
+        flexDirection: 'row',
         flex: 1,
-        borderWidth: 3,
-        borderColor: 'orange',
         // aspectRatio: 1,
         // justifyContent: 'center',
         // alignItems: 'center',
 
     },
     board: {
-        flexDirection: 'column',
+        flexDirection: 'row',
         flex: 1,
-        // aspectRatio: 1,
-        borderWidth: 3,
-        borderColor: 'red',
-        height: 200,
+        aspectRatio: 1,
         // justifyContent: 'center',
         // alignItems: 'center',
     },
     column: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         flex: 1,
-        borderWidth: 3,
-        borderColor: 'purple',
         //   marginLeft: 24,
         //   marginRight: 24,
         //   marginBottom: 24
     },
     square: {
         flex: 1,
-        // transform: [{ rotate: '90deg' }]
+        transform: [{ rotate: '90deg' }]
         //TODO: fix camera orientation
     },
     camera: {
@@ -460,8 +453,6 @@ const styles = {
     },
     buttonRow: {
         flexDirection: 'row',
-        borderWidth: 3,
-        borderColor: 'black',
     }
 }
 
