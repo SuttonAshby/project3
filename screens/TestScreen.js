@@ -63,6 +63,7 @@ export default class TestScreen extends Component {
     }
 
     componentDidMount() {
+        //Generate board if there isn't an active board.
         if (!this.state.activeBoard) {
             this.generateBoard()
         }
@@ -141,53 +142,53 @@ export default class TestScreen extends Component {
 
         let saveResult = await CameraRoll.saveToCameraRoll(photo.uri, 'photo');
 
-        this.setState({ currentSource: saveResult })
+        this.setState({ currentSource: photo.uri })
 
         let newBoard = null;
         switch (this.state.currentSquare) {
             case 1:
                 newBoard = this.state.board
-                newBoard[0].source = saveResult
+                newBoard[0].source = photo.uri
                 this.setState({ board: newBoard })
                 break;
             case 2:
                 newBoard = this.state.board
-                newBoard[1].source = saveResult
+                newBoard[1].source = photo.uri
                 this.setState({ board: newBoard })
                 break;
             case 3:
                 newBoard = this.state.board
-                newBoard[2].source = saveResult
+                newBoard[2].source = photo.uri
                 this.setState({ board: newBoard })
                 break;
             case 4:
                 newBoard = this.state.board
-                newBoard[3].source = saveResult
+                newBoard[3].source = photo.uri
                 this.setState({ board: newBoard })
                 break;
             case 5:
                 newBoard = this.state.board
-                newBoard[4].source = saveResult
+                newBoard[4].source = photo.uri
                 this.setState({ board: newBoard })
                 break;
             case 6:
                 newBoard = this.state.board
-                newBoard[5].source = saveResult
+                newBoard[5].source = photo.uri
                 this.setState({ board: newBoard })
                 break;
             case 7:
                 newBoard = this.state.board
-                newBoard[6].source = saveResult
+                newBoard[6].source = photo.uri
                 this.setState({ board: newBoard })
                 break;
             case 8:
                 newBoard = this.state.board
-                newBoard[7].source = saveResult
+                newBoard[7].source = photo.uri
                 this.setState({ board: newBoard })
                 break;
             case 9:
                 newBoard = this.state.board
-                newBoard[8].source = saveResult
+                newBoard[8].source = photo.uri
                 this.setState({ board: newBoard })
                 break;
         }
@@ -400,9 +401,26 @@ export default class TestScreen extends Component {
                                         // }} /></ImageBackground>
                                         //Testing absolute fill view =========================================================
                                         //Working sample of creating own imagebackground
-                                        <View style={{ flex: 1 }}>
-                                            <Image source={{ uri: this.state.currentSource }}
-                                                style={[styles.imageCheck, StyleSheet.absoluteFill]} />
+                                        // <View style={{ flex: 1 }}>
+                                        //     <Image source={{ uri: this.state.currentSource }}
+                                        //         style={[styles.imageCheck, StyleSheet.absoluteFill]} />
+                                        //     <Button
+                                        //         title="Retake"
+                                        //         style={{ flex: 0, backgroundColor: 'red' }}
+                                        //         onPress={() => {
+                                        //             this.setState({ currentSource: null });
+                                        //         }} />
+                                        //     <Button
+                                        //         title="Keep"
+                                        //         style={{ flex: 0, backgroundColor: 'red' }}
+                                        //         onPress={() => {
+                                        //             this.setModalVisible(!this.state.modalVisible);
+                                        //             this.setState({ currentSource: null })
+                                        //         }} />
+                                        // </View>
+                                        //====================================================================================
+                                        <ImageBackground source={{ uri: this.state.currentSource }}
+                                            style={{ flex: 1 }}> 
                                             <Button
                                                 title="Retake"
                                                 style={{ flex: 0, backgroundColor: 'red' }}
@@ -415,8 +433,7 @@ export default class TestScreen extends Component {
                                                 onPress={() => {
                                                     this.setModalVisible(!this.state.modalVisible);
                                                     this.setState({ currentSource: null })
-                                                }} />
-                                        </View>
+                                                }} /></ImageBackground>
                                         :
                                         <Camera style={styles.camera}
                                             type={this.state.type}
@@ -447,9 +464,9 @@ export default class TestScreen extends Component {
                                                 onPress={() => {
                                                     this.setState({
                                                         type: this.state.type === Camera.Constants.Type.back
-                                                          ? Camera.Constants.Type.front
-                                                          : Camera.Constants.Type.back,
-                                                      })
+                                                            ? Camera.Constants.Type.front
+                                                            : Camera.Constants.Type.back,
+                                                    })
                                                 }}
                                             />
                                         </Camera>}
@@ -493,18 +510,16 @@ const styles = {
     },
     square: {
         flex: 1,
-        transform: [{ rotate: '90deg' }],
-
-        //TODO: fix camera orientation
+        // transform: [{ rotate: '90deg' }],
     },
     camera: {
         flex: 1,
     },
     imageCheck: {
         flex: 1,
-        transform: [{ rotate: '90deg' }]
+        // transform: [{ rotate: '90deg' }]
     },
-    emptySquare:{
+    emptySquare: {
 
     },
     photoSquare: {
