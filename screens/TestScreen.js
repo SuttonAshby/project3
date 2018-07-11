@@ -146,47 +146,47 @@ export default class TestScreen extends Component {
 
         let newBoard = null;
         switch (this.state.currentSquare) {
-            case 1:
+            case 0:
                 newBoard = this.state.board
                 newBoard[0].source = photo.uri
                 this.setState({ board: newBoard })
                 break;
-            case 2:
+            case 1:
                 newBoard = this.state.board
                 newBoard[1].source = photo.uri
                 this.setState({ board: newBoard })
                 break;
-            case 3:
+            case 2:
                 newBoard = this.state.board
                 newBoard[2].source = photo.uri
                 this.setState({ board: newBoard })
                 break;
-            case 4:
+            case 3:
                 newBoard = this.state.board
                 newBoard[3].source = photo.uri
                 this.setState({ board: newBoard })
                 break;
-            case 5:
+            case 4:
                 newBoard = this.state.board
                 newBoard[4].source = photo.uri
                 this.setState({ board: newBoard })
                 break;
-            case 6:
+            case 5:
                 newBoard = this.state.board
                 newBoard[5].source = photo.uri
                 this.setState({ board: newBoard })
                 break;
-            case 7:
+            case 6:
                 newBoard = this.state.board
                 newBoard[6].source = photo.uri
                 this.setState({ board: newBoard })
                 break;
-            case 8:
+            case 7:
                 newBoard = this.state.board
                 newBoard[7].source = photo.uri
                 this.setState({ board: newBoard })
                 break;
-            case 9:
+            case 8:
                 newBoard = this.state.board
                 newBoard[8].source = photo.uri
                 this.setState({ board: newBoard })
@@ -221,7 +221,6 @@ export default class TestScreen extends Component {
         this.setState({ currentSquare: id })
     }
 
-
     render() {
         let { hasCameraPermission, image } = this.state;
 
@@ -240,45 +239,45 @@ export default class TestScreen extends Component {
                     }} >
                     <View style={styles.board}>
                         <View style={styles.column}>
-                            <Square onPress={()=>{this.pullUpCamera(1)}} //SQUARE ONE
+                            <Square onPress={()=>{this.pullUpCamera(0)}} //SQUARE ONE
                                 source={this.state.board[0].source} 
                                 name={this.state.board[0].name} 
                                 color={"#EE2C38"}/>
-                            <Square onPress={()=>{this.pullUpCamera(2)}} //SQUARE TWO
+                            <Square onPress={()=>{this.pullUpCamera(1)}} //SQUARE TWO
                                 source={this.state.board[1].source} 
                                 name={this.state.board[1].name} 
                                 color={"#FAA030"}/>
-                            <Square onPress={()=>{this.pullUpCamera(3)}} //SQUARE THREE
+                            <Square onPress={()=>{this.pullUpCamera(2)}} //SQUARE THREE
                                 source={this.state.board[2].source} 
                                 name={this.state.board[2].name} 
                                 color={"#32B76C"}/>
                         </View>
                         <View style={styles.column}>
                             {/* THIS IS COLUMN TWO ================================================================================== */}
-                            <Square onPress={()=>{this.pullUpCamera(4)}} //SQUARE FOUR
+                            <Square onPress={()=>{this.pullUpCamera(3)}} //SQUARE FOUR
                                 source={this.state.board[3].source} 
                                 name={this.state.board[3].name} 
                                 color={"#FAA030"}/>
-                            <Square onPress={()=>{this.pullUpCamera(5)}} //SQUARE FIVE
+                            <Square onPress={()=>{this.pullUpCamera(4)}} //SQUARE FIVE
                                 source={this.state.board[4].source} 
                                 name={this.state.board[4].name} 
                                 color={"#32B76C"}/>
-                            <Square onPress={()=>{this.pullUpCamera(6)}} //SQUARE SIX
+                            <Square onPress={()=>{this.pullUpCamera(5)}} //SQUARE SIX
                                 source={this.state.board[5].source} 
                                 name={this.state.board[5].name} 
                                 color={"#EE2C38"}/>
                         </View>
                         <View style={styles.column}>
                             {/* THIS IS COLUMN THREE ================================================================================== */}
-                            <Square onPress={()=>{this.pullUpCamera(7)}} //SQUARE SEVEN
+                            <Square onPress={()=>{this.pullUpCamera(6)}} //SQUARE SEVEN
                                 source={this.state.board[6].source} 
                                 name={this.state.board[6].name} 
                                 color={"#EE2C38"}/>
-                            <Square onPress={()=>{this.pullUpCamera(8)}} //SQUARE EIGHT
+                            <Square onPress={()=>{this.pullUpCamera(7)}} //SQUARE EIGHT
                                 source={this.state.board[7].source} 
                                 name={this.state.board[7].name} 
                                 color={"#FAA030"}/>
-                            <Square onPress={()=>{this.pullUpCamera(9)}} //SQUARE NINE
+                            <Square onPress={()=>{this.pullUpCamera(8)}} //SQUARE NINE
                                 source={this.state.board[8].source} 
                                 name={this.state.board[8].name} 
                                 color={"#32B76C"}/>
