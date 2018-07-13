@@ -99,24 +99,22 @@ export default class TestScreen extends Component {
         { name: 'Eight', source: null },
         { name: 'Nine', source: null }]
 
-        this.setState({board: newBoard})
-
-    
-        const active = true;
-        const challenges = []
-        console.log("Starting")
-        while (challenges.length < 9) {
-            let newChallenge = anime[Math.floor(Math.random() * anime.length)].anime
-            if (!challenges.includes(newChallenge)) {
-                challenges.push(newChallenge)
+        this.setState({board: newBoard}, ()=>{
+            const active = true;
+            const challenges = []
+            console.log("Starting")
+            while (challenges.length < 9) {
+                let newChallenge = anime[Math.floor(Math.random() * anime.length)].anime
+                if (!challenges.includes(newChallenge)) {
+                    challenges.push(newChallenge)
+                }
             }
-        }
-        newBoard = this.state.board
-        for (let i = 0; i < challenges.length; i++) {
-            newBoard[i].name = challenges[i]
-        }
-        this.setState({ board: newBoard })
-        this.setState({ activeBoard: active })
+            newBoard = this.state.board
+            for (let i = 0; i < challenges.length; i++) {
+                newBoard[i].name = challenges[i]
+            }
+            this.setState({ board: newBoard, activeBoard: active})
+        })
     }
 
 

@@ -16,8 +16,6 @@ export default class Square extends Component {
     // }
 
     render() {
-        console.log(this.props)
-
         return <TouchableHighlight onPress={this.props.onPress} 
             style={!this.props.source ? [styles.emptySquare, { backgroundColor: this.props.color }] : styles.photoSquare }>
             {this.props.source ? <ImageBackground source={{ uri: this.props.source }}style={{ flex: 1 }} >
