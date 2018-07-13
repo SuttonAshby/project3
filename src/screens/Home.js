@@ -164,9 +164,6 @@ export default class Home extends Component {
         // this.setModalVisible(!this.state.modalVisible)
 
         console.log('Taking photo');
-        // let photo = await this.camera.takePictureAsync({ base64: true, exif: true });
-
-        
 
         console.log(result);
         
@@ -253,24 +250,24 @@ export default class Home extends Component {
     }
     // =================================================================
     // TESTING OUT NEW METHOD OF CAMERA
-    onChooseImagePress = async () => {
-        await Permissions.askAsync(Permissions.CAMERA);
-        await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    // onChooseImagePress = async () => {
+    //     await Permissions.askAsync(Permissions.CAMERA);
+    //     await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
-        let result = await ImagePicker.launchCameraAsync();
-        //let result = await ImagePicker.launchImageLibraryAsync();
+    //     let result = await ImagePicker.launchCameraAsync();
+    //     //let result = await ImagePicker.launchImageLibraryAsync();
         
-        return result;
-        // if (!result.cancelled) {
-        //   this.uploadImage(result.uri, "test-image")
-        //     .then(() => {
-        //       Alert.alert("Success");
-        //     })
-        //     .catch((error) => {
-        //       Alert.alert(error);
-        //     });
-        // }
-      }
+    //     return result;
+    //     // if (!result.cancelled) {
+    //     //   this.uploadImage(result.uri, "test-image")
+    //     //     .then(() => {
+    //     //       Alert.alert("Success");
+    //     //     })
+    //     //     .catch((error) => {
+    //     //       Alert.alert(error);
+    //     //     });
+    //     // }
+    //   }
 
     // =================================================================
 
