@@ -89,22 +89,33 @@ export default class TestScreen extends Component {
     }
 
     generateBoard() {
-        let newBoard = null;
-        const active = true;
-        const challenges = []
-        console.log("Starting")
-        while (challenges.length < 9) {
-            let newChallenge = anime[Math.floor(Math.random() * anime.length)].anime
-            if (!challenges.includes(newChallenge)) {
-                challenges.push(newChallenge)
+
+        let newBoard = [{ name: 'One', source: null },
+        { name: 'Two', source: null },
+        { name: 'Three', source: null },
+        { name: 'Four', source: null },
+        { name: 'Five', source: null },
+        { name: 'Six', source: null },
+        { name: 'Seven', source: null },
+        { name: 'Eight', source: null },
+        { name: 'Nine', source: null }]
+
+        this.setState({board: newBoard}, ()=>{
+            const active = true;
+            const challenges = []
+            console.log("Starting")
+            while (challenges.length < 9) {
+                let newChallenge = anime[Math.floor(Math.random() * anime.length)].anime
+                if (!challenges.includes(newChallenge)) {
+                    challenges.push(newChallenge)
+                }
             }
-        }
-        newBoard = this.state.board
-        for (let i = 0; i < challenges.length; i++) {
-            newBoard[i].name = challenges[i]
-        }
-        this.setState({ board: newBoard })
-        this.setState({ activeBoard: active })
+            newBoard = this.state.board
+            for (let i = 0; i < challenges.length; i++) {
+                newBoard[i].name = challenges[i]
+            }
+            this.setState({ board: newBoard, activeBoard: active})
+        })
     }
 
 
@@ -275,6 +286,7 @@ export default class TestScreen extends Component {
 
             return (
                 // Try setting `flexDirection` to `column`.
+                <View style={{flex: 1, alignContent: 'flex-start'}}>
                 <View style={styles.container}
                     collapsable={false}
                     ref={view => {
@@ -282,48 +294,48 @@ export default class TestScreen extends Component {
                     }} >
                     <View style={styles.board}>
                         <View style={styles.column}>
-                            <Square onPress={()=>{this.pullUpCamera(0)}} //SQUARE ONE
-                                source={this.state.board[0].source} 
-                                name={this.state.board[0].name} 
-                                color={"#EE2C38"}/>
-                            <Square onPress={()=>{this.pullUpCamera(1)}} //SQUARE TWO
-                                source={this.state.board[1].source} 
-                                name={this.state.board[1].name} 
-                                color={"#FAA030"}/>
-                            <Square onPress={()=>{this.pullUpCamera(2)}} //SQUARE THREE
-                                source={this.state.board[2].source} 
-                                name={this.state.board[2].name} 
-                                color={"#32B76C"}/>
+                            <Square onPress={() => { this.pullUpCamera(0) }} //SQUARE ONE
+                                source={this.state.board[0].source}
+                                name={this.state.board[0].name}
+                                color={"#EE2C38"} />
+                            <Square onPress={() => { this.pullUpCamera(1) }} //SQUARE TWO
+                                source={this.state.board[1].source}
+                                name={this.state.board[1].name}
+                                color={"#FAA030"} />
+                            <Square onPress={() => { this.pullUpCamera(2) }} //SQUARE THREE
+                                source={this.state.board[2].source}
+                                name={this.state.board[2].name}
+                                color={"#32B76C"} />
                         </View>
                         <View style={styles.column}>
                             {/* THIS IS COLUMN TWO ================================================================================== */}
-                            <Square onPress={()=>{this.pullUpCamera(3)}} //SQUARE FOUR
-                                source={this.state.board[3].source} 
-                                name={this.state.board[3].name} 
-                                color={"#FAA030"}/>
-                            <Square onPress={()=>{this.pullUpCamera(4)}} //SQUARE FIVE
-                                source={this.state.board[4].source} 
-                                name={this.state.board[4].name} 
-                                color={"#32B76C"}/>
-                            <Square onPress={()=>{this.pullUpCamera(5)}} //SQUARE SIX
-                                source={this.state.board[5].source} 
-                                name={this.state.board[5].name} 
-                                color={"#EE2C38"}/>
+                            <Square onPress={() => { this.pullUpCamera(3) }} //SQUARE FOUR
+                                source={this.state.board[3].source}
+                                name={this.state.board[3].name}
+                                color={"#FAA030"} />
+                            <Square onPress={() => { this.pullUpCamera(4) }} //SQUARE FIVE
+                                source={this.state.board[4].source}
+                                name={this.state.board[4].name}
+                                color={"#32B76C"} />
+                            <Square onPress={() => { this.pullUpCamera(5) }} //SQUARE SIX
+                                source={this.state.board[5].source}
+                                name={this.state.board[5].name}
+                                color={"#EE2C38"} />
                         </View>
                         <View style={styles.column}>
                             {/* THIS IS COLUMN THREE ================================================================================== */}
-                            <Square onPress={()=>{this.pullUpCamera(6)}} //SQUARE SEVEN
-                                source={this.state.board[6].source} 
-                                name={this.state.board[6].name} 
-                                color={"#EE2C38"}/>
-                            <Square onPress={()=>{this.pullUpCamera(7)}} //SQUARE EIGHT
-                                source={this.state.board[7].source} 
-                                name={this.state.board[7].name} 
-                                color={"#FAA030"}/>
-                            <Square onPress={()=>{this.pullUpCamera(8)}} //SQUARE NINE
-                                source={this.state.board[8].source} 
-                                name={this.state.board[8].name} 
-                                color={"#32B76C"}/>
+                            <Square onPress={() => { this.pullUpCamera(6) }} //SQUARE SEVEN
+                                source={this.state.board[6].source}
+                                name={this.state.board[6].name}
+                                color={"#EE2C38"} />
+                            <Square onPress={() => { this.pullUpCamera(7) }} //SQUARE EIGHT
+                                source={this.state.board[7].source}
+                                name={this.state.board[7].name}
+                                color={"#FAA030"} />
+                            <Square onPress={() => { this.pullUpCamera(8) }} //SQUARE NINE
+                                source={this.state.board[8].source}
+                                name={this.state.board[8].name}
+                                color={"#32B76C"} />
                         </View>
                     </View>
                     {/* <View style={{ flex: 1, flexDirection: "column", paddingVertical: 50, paddingHorizontal: 10, }}>
@@ -341,20 +353,21 @@ export default class TestScreen extends Component {
                                 <View style={styles.column}>
                                     {this.state.currentSource ?
                                         <ImageBackground source={{ uri: this.state.currentSource }}
-                                            style={{ flex: 1 }}> 
-                                            <Button
-                                                title="Retake"
-                                                style={{ flex: 0, backgroundColor: 'red' }}
-                                                onPress={() => {
-                                                    this.setState({ currentSource: null });
-                                                }} />
-                                            <Button
-                                                title="Keep"
-                                                style={{ flex: 0, backgroundColor: 'red' }}
-                                                onPress={() => {
-                                                    this.setModalVisible(!this.state.modalVisible);
-                                                    this.setState({ currentSource: null })
-                                                }} /></ImageBackground>
+                                            style={styles.imageCheck}>
+                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <Button
+                                                    title="Retake"
+                                                    style={{}}
+                                                    onPress={() => {
+                                                        this.setState({ currentSource: null });
+                                                    }} />
+                                                <Button
+                                                    title="Keep"
+                                                    style={{}}
+                                                    onPress={() => {
+                                                        this.setModalVisible(!this.state.modalVisible);
+                                                        this.setState({ currentSource: null })
+                                                    }} /></View></ImageBackground>
                                         :
                                         <Camera style={styles.camera}
                                             type={this.state.type}
@@ -366,35 +379,63 @@ export default class TestScreen extends Component {
                                                     flex: 1,
                                                     backgroundColor: 'transparent',
                                                     flexDirection: 'row',
-                                                }} />
+                                                    justifyContent: 'space-between'
+                                                }} >
+                                                <Button
+                                                    title="Back"
+                                                    // style={{ position: "absolute", top: 0, left: 0 }}
+                                                    onPress={() => {
+                                                        this.setModalVisible(!this.state.modalVisible);
+                                                    }}
+                                                />
+                                                <Button
+                                                    title="Flip"
+                                                    // style={{ position: "absolute", top: 0, right: 0 }}
+                                                    onPress={() => {
+                                                        this.setState({
+                                                            type: this.state.type === Camera.Constants.Type.back
+                                                                ? Camera.Constants.Type.front
+                                                                : Camera.Constants.Type.back,
+                                                        })
+                                                    }}
+                                                />
+                                            </View>
+                                            {/* <TouchableOpacity
+                                             title="Snap"
+                                             onPress={this.press.bind(this)}
+
+                                                style={{
+                                                    borderWidth:1,
+                                                    borderColor:'rgba(255,255,255,0.2)',
+                                                    // alignItems:'center',
+                                                    // justifyContent:'center',
+                                                    width:100,
+                                                    height:100,
+                                                    backgroundColor:'#fff',
+                                                    borderRadius:100,
+                                                    }}
+                                                >
+                                                </TouchableOpacity> */}
                                             <Button
                                                 title="Snap"
-                                                style={{ flex: 0, backgroundColor: 'red' }}
+                                                style={{ backgroundColor: 'red' }}
                                                 onPress={this.press.bind(this)}
-                                            />
-                                            <Button
-                                                title="Back"
-                                                style={{ flex: 0, backgroundColor: 'red' }}
-                                                onPress={() => {
-                                                    this.setModalVisible(!this.state.modalVisible);
-                                                }}
-                                            />
-                                            <Button
-                                                title="Flip"
-                                                style={{ flex: 0, backgroundColor: 'red' }}
-                                                onPress={() => {
-                                                    this.setState({
-                                                        type: this.state.type === Camera.Constants.Type.back
-                                                            ? Camera.Constants.Type.front
-                                                            : Camera.Constants.Type.back,
-                                                    })
-                                                }}
                                             />
                                         </Camera>}
                                 </View>
                             </View>
                         </View>
                     </Modal>
+                </View>
+                <View style={{flex: 0, 
+                    // borderColor: 'red', borderWidth: 20
+                    }}>
+                    <Button
+                        title="Generate New Board"
+                        style={{}}
+                        onPress={()=>{this.generateBoard()}}
+                    />
+                </View>
                 </View>
             );
         }
@@ -408,8 +449,8 @@ const styles = {
         //   width: 200,
         //   height: 200,
         flexDirection: 'row',
-        flex: 1,
-        backgroundColor: 'black'
+        // flex: 1,
+        backgroundColor: 'black',
         // aspectRatio: 1,
         // justifyContent: 'center',
         // alignItems: 'center',
@@ -435,16 +476,15 @@ const styles = {
     },
     camera: {
         flex: 1,
+        borderWidth: 1,
+        backgroundColor: 'red',
+        // alignItems: 'center',
     },
     imageCheck: {
         flex: 1,
+        justifyContent: "flex-end",
+        flexDirection: 'column'
         // transform: [{ rotate: '90deg' }]
-    },
-    emptySquare: {
-
-    },
-    photoSquare: {
-
     }
 }
 //     return (
