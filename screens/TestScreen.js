@@ -127,7 +127,7 @@ export default class TestScreen extends Component {
 
         console.log('Taking photo');
         let photo = await this.camera.takePictureAsync({ base64: true, exif: true });
-        //let saveResult = await CameraRoll.saveToCameraRoll(photo.uri, 'photo');
+        let saveResult = await CameraRoll.saveToCameraRoll(photo.uri, 'photo');
 
         let newBoard = null;
         switch (this.state.currentSquare) {
