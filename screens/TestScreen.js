@@ -20,6 +20,12 @@ import { Camera, FileSystem, Permissions, Constants, takeSnapshotAsync, ImagePic
 import anime from "../anime.json";
 import { Square } from './../components/AppComponents';
 
+// import RNFetchBlob from 'react-native-fetch-blob'
+// const Blob = RNFetchBlob.polyfill.Blob;
+// const fs = RNFetchBlob.fs;
+// window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+// window.Blob = Blob
+
 
 
 export default class TestScreen extends Component {
@@ -219,7 +225,11 @@ export default class TestScreen extends Component {
 
 
         console.log('Taking photo');
+<<<<<<< HEAD
         let photo = await this.camera.takePictureAsync({ base64: true, exif: true });
+=======
+        let photo = await this.camera.takePictureAsync({ quality: 0, base64: true, exif: false });
+>>>>>>> e08b5c6dac6d15cb7231966aa50325b72a3139a8
 
         let saveResult = await CameraRoll.saveToCameraRoll(photo.uri, 'photo');
 
@@ -274,6 +284,42 @@ export default class TestScreen extends Component {
                 break;
         }
 
+<<<<<<< HEAD
+=======
+        // if(this.state.currentSquare === 1){
+        //     const newBoard = this.state.board
+        //     newBoard[0].source = saveResult
+        //     this.setState({ board: newBoard });
+        // } else {
+        // this.setState({ cameraRollUri: saveResult });
+        // }
+        // this.setState({currentSquare: saveResult});
+
+
+        // sending the image to firebase and tagging it with an UserID through saveUniqueDataToFirebase() method 
+
+                // current user's ID:
+        // console.log(firebase.auth().currentUser);
+        const authID = firebase.auth().currentUser.uid;
+        
+        // grab the imageURI
+        const response = await fetch(photo.uri);
+        console.log("response");
+        console.log(response);
+        
+        // put that data into blob and then store that photo into firebase
+        const blob = await response.url.blob();
+        console.log(blob);
+
+        // set up firebase so we can put the picture that was just taken into an images folder in firebase
+        var ref = firebase.storage().ref().child("images/" + authID);
+        // uploading the images to firebase
+        return ref.put(blob);
+
+
+
+
+>>>>>>> e08b5c6dac6d15cb7231966aa50325b72a3139a8
 
         console.log("pressed");
 <<<<<<< HEAD
@@ -327,6 +373,51 @@ export default class TestScreen extends Component {
 
         this.setState({ currentSquare: id })
     }
+
+    // ============================================================
+
+    uploadImage = (path) => {
+        const imageFile = RNFetchBlob.wrap(path);
+    
+
+    const ref = firebase.storage().ref('path/to/image');
+    var uploadBlob = null;
+
+    Blob.build(imageFile, { type: 'image/jpg;' })
+        .then((imageBlob) => {
+            uploadBlob = imageBlob;
+            return ref.put(imageBlob, { contentType: 'image/jpg' });
+        })
+        .then(() => {
+            uploadBlob.close();
+            return ref.getDownloadURL();
+        })
+        .catch(() => {
+            dispatch({
+                type: UPDATE_PROFILE_INFO_FAIL,
+                payload: 'Unable to upload profile picture, please try again'
+            });
+        });
+}
+
+    saveUniqueDataToFirebase = async (image) => {
+        // current user's ID:
+        // console.log(firebase.auth().currentUser);
+        const authID = firebase.auth().currentUser.uid;
+        
+        // grab the imageURI
+        const response = await fetch(image);
+        // put that data into blob and then store that photo into firebase
+        const blob = await response.blob();
+
+        // set up firebase so we can put the picture that was just taken into an images folder in firebase
+        var ref = firebase.storage().ref().child("images/" + authID);
+        // uploading the images to firebase
+        return ref.put(blob);
+ 
+    }
+
+    // ============================================================
 
     render() {
         let { hasCameraPermission, image } = this.state;
