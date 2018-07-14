@@ -168,6 +168,22 @@ export default class TestScreen extends Component {
             this.setState({ board: newBoard, activeBoard: active})
         })
     }
+    //==================================================================
+
+    isNotNull(currentValue){
+        return currentValue !== null
+    }
+
+
+    checkBoardState() {
+
+        const checkArray = []
+        for(let i = 0; i < this.state.board.length; i ++){
+            checkArray.push(this.state.board[i].source)
+        }
+        return checkArray.every(this.isNotNull)
+        console.log(checkArray.every(this.isNotNull))
+    }
 
 
     // =================================================================
@@ -260,6 +276,7 @@ export default class TestScreen extends Component {
 
 
         console.log("pressed");
+<<<<<<< HEAD
         console.log(saveResult);
         
         this.storeToFirebase(saveResult);
@@ -286,6 +303,9 @@ export default class TestScreen extends Component {
         var ref = firebase.storage().ref().child("images/" + photoID);
         // uploading the images to firebase
         return ref.put(blob);
+=======
+        this.checkBoardState()
+>>>>>>> a76fb5b07ef66b6cab0970b91f417d04d0d0adde
     }
 
     // Occurs when signout is pressed...
@@ -330,45 +350,45 @@ export default class TestScreen extends Component {
                             <Square onPress={() => { this.pullUpCamera(0) }} //SQUARE ONE
                                 source={this.state.board[0].source}
                                 name={this.state.board[0].name}
-                                color={"#EE2C38"} />
+                                color={"#00ccff"} />
                             <Square onPress={() => { this.pullUpCamera(1) }} //SQUARE TWO
                                 source={this.state.board[1].source}
                                 name={this.state.board[1].name}
-                                color={"#FAA030"} />
+                                color={"#4ddbff"} />
                             <Square onPress={() => { this.pullUpCamera(2) }} //SQUARE THREE
                                 source={this.state.board[2].source}
                                 name={this.state.board[2].name}
-                                color={"#32B76C"} />
+                                color={"#99ebff"} />
                         </View>
                         <View style={styles.column}>
                             {/* THIS IS COLUMN TWO ================================================================================== */}
                             <Square onPress={() => { this.pullUpCamera(3) }} //SQUARE FOUR
                                 source={this.state.board[3].source}
                                 name={this.state.board[3].name}
-                                color={"#FAA030"} />
+                                color={"#99ebff"} />
                             <Square onPress={() => { this.pullUpCamera(4) }} //SQUARE FIVE
                                 source={this.state.board[4].source}
                                 name={this.state.board[4].name}
-                                color={"#32B76C"} />
+                                color={"#00ccff"} />
                             <Square onPress={() => { this.pullUpCamera(5) }} //SQUARE SIX
                                 source={this.state.board[5].source}
                                 name={this.state.board[5].name}
-                                color={"#EE2C38"} />
+                                color={"#4ddbff"} />
                         </View>
                         <View style={styles.column}>
                             {/* THIS IS COLUMN THREE ================================================================================== */}
                             <Square onPress={() => { this.pullUpCamera(6) }} //SQUARE SEVEN
                                 source={this.state.board[6].source}
                                 name={this.state.board[6].name}
-                                color={"#EE2C38"} />
+                                color={"#4ddbff"} />
                             <Square onPress={() => { this.pullUpCamera(7) }} //SQUARE EIGHT
                                 source={this.state.board[7].source}
                                 name={this.state.board[7].name}
-                                color={"#FAA030"} />
+                                color={"#99ebff"} />
                             <Square onPress={() => { this.pullUpCamera(8) }} //SQUARE NINE
                                 source={this.state.board[8].source}
                                 name={this.state.board[8].name}
-                                color={"#32B76C"} />
+                                color={"#00ccff"} />
                         </View>
                     </View>
                     {/* <View style={{ flex: 1, flexDirection: "column", paddingVertical: 50, paddingHorizontal: 10, }}>
