@@ -16,9 +16,10 @@ import {
 } from 'react-native';
 import { TestComponent, PhoneButton } from './../components/AppComponents';
 import * as firebase from 'firebase';
-import { Camera, FileSystem, Permissions, Constants, takeSnapshotAsync, ImagePicker } from 'expo';
+import { Camera, FileSystem, Permissions, Constants, takeSnapshotAsync, ImagePicker, launchCameraAsync } from 'expo';
 import anime from "../anime.json";
 import { Square } from './../components/AppComponents';
+
 
 
 export default class TestScreen extends Component {
@@ -46,23 +47,74 @@ export default class TestScreen extends Component {
         { name: 'Nine', source: null }],
         currentSquare: null,
         activeBoard: false,
+        image: null,
+        uploading: false,
     }
 
-    _askPermissionsAsync = async () => { // this was needed to get image picker working and this has to be called in the method as well
-        await Permissions.askAsync(Permissions.CAMERA);
-        await Permissions.askAsync(Permissions.CAMERA_ROLL);
-        // you would probably do something to verify that permissions
-        // are actually granted, but I'm skipping that for brevity
+    _checkPermissions = async () => { 
+        const result1 = await this._checkPermissionCamera();
+        const result2 = await this._checkPermissionCameraRoll();
+
+        return true;
     };
 
+    _checkPermissionCamera = async () => { 
+        const { status } = await Permissions.getAsync(Permissions.CAMERA);
+        if (status === 'granted') {
+            return;
+        }
+        else
+        {
+            const result = await this._checkPermissionCameraRoll();
+
+            return result;
+        }
+    };
+
+    _checkPermissionCameraRoll = async () => {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+        if (status === 'granted') {
+            return status;
+        }
+        else
+        {
+            const result = await this._getPermissionCamera();
+
+            return result;
+        }
+    }
+
+    _getPermissionCamera = async () => {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA);
+
+        if (status !== 'granted')
+        {
+            throw new Error('Camera permission not granted');
+        }
+
+        return status;
+    }
+
+    _getPermissionCamera = async () => {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+        if (status !== 'granted')
+        {
+            throw new Error('Camera Roll permission not granted');
+        }
+
+        return status;
+    }
 
     // =================================================================
     componentWillMount = async () => {
-        const { status } = await Permissions.askAsync(Permissions.CAMERA);
-        this.setState({ hasCameraPermission: status === 'granted' });
+        const result = await this._checkPermissions();
+        this.setState({ hasCameraPermission: result });
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+
         //Generate board if there isn't an active board.
         if (!this.state.activeBoard) {
             this.generateBoard()
@@ -137,35 +189,37 @@ export default class TestScreen extends Component {
     // =================================================================
 
 
-    _saveToCameraRollAsync = async () => {
-        await this.askPermissionsAsync();
-        console.log("savetoCameraRoll");
-        let result = await takeSnapshotAsync(this._container, {
-            format: 'png',
-            result: 'file',
-        });
+    // _saveToCameraRollAsync = async () => {
+    //     await this.askPermissionsAsync();
+    //     console.log("savetoCameraRoll");
+    //     let result = await takeSnapshotAsync(this._container, {
+    //         format: 'png',
+    //         result: 'file',
+    //     });
 
-        let saveResult = await CameraRoll.saveToCameraRoll(result, 'photo');
-        this.setState({ cameraRollUri: saveResult });
-    };
+    //     let saveResult = await CameraRoll.saveToCameraRoll(result, 'photo');
+    //     this.setState({ cameraRollUri: saveResult });
+    // };
 
     // setModalVisible(visible) {
     //     this.setState({ modalVisible: visible });
     // }
 
-    setModalVisible(visible) {
+    async setModalVisible(visible) {
+        
         this.setState({ modalVisible: visible });
     }
 
     async press() {
 
+
         console.log('Button Pressed');
         //Toggle Modal
-        // this.setModalVisible(!this.state.modalVisible)
+        // this.setModalVisible(!this.state.modalVisible);
 
 
         console.log('Taking photo');
-        let photo = await this.camera.takePictureAsync({ base64: false, exif: false });
+        let photo = await this.camera.takePictureAsync({ base64: true, exif: true });
 
         let saveResult = await CameraRoll.saveToCameraRoll(photo.uri, 'photo');
 
@@ -220,16 +274,25 @@ export default class TestScreen extends Component {
                 break;
         }
 
-        // if(this.state.currentSquare === 1){
-        //     const newBoard = this.state.board
-        //     newBoard[0].source = saveResult
-        //     this.setState({ board: newBoard });
-        // } else {
-        // this.setState({ cameraRollUri: saveResult });
-        // }
-        // this.setState({currentSquare: saveResult});
+        // storing image to firebase
+        
+        this.saveImageToFirebase(saveResult);
+        console.log(saveResult);
         console.log("pressed");
         this.checkBoardState()
+    }
+
+    saveImageToFirebase = async (image) => {
+        console.log("hello testing firebase image");
+        const photoId = Date.now();
+
+        const response = await fetch(image);
+        const blob = await response.blob();
+
+
+        let ref = firebase.storage().ref().child("image/" + photoId);
+        
+        return ref.put(blob);
     }
 
     // Occurs when signout is pressed...
@@ -244,8 +307,11 @@ export default class TestScreen extends Component {
         return user.reauthenticateWithCredential(cred);
     }
 
-    pullUpCamera = (id) => {
+    pullUpCamera = async (id) => {
+        const result = await this._checkPermissions();
+
         this.setModalVisible(true);
+
         this.setState({ currentSquare: id })
     }
 
