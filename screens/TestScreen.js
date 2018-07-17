@@ -279,7 +279,7 @@ export default class TestScreen extends Component {
         this.saveImageToFirebase(saveResult);
         console.log(saveResult);
         console.log("pressed");
-        // this.checkBoardState()
+        this.checkBoardState()
     }
 
     saveImageToFirebase = async (image) => {
@@ -287,14 +287,11 @@ export default class TestScreen extends Component {
         const photoId = Date.now();
 
         const response = await fetch(image);
-        console.log("response");
-        console.log(response);
         const blob = await response.blob();
-        console.log("blob");
-        console.log(blob);
 
-        let ref = firebase.storage().ref().child("image/" + "testing111");
-        console.log("this should've sent it to firebase");
+
+        let ref = firebase.storage().ref().child("image/" + photoId);
+        
         return ref.put(blob);
     }
 
