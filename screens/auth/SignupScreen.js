@@ -8,7 +8,7 @@ export default class SignupScreen extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             email: "",
             password: "",
             passwordConfirm: "",
@@ -28,56 +28,64 @@ export default class SignupScreen extends React.Component {
     onBackToLoginPress = () => {
         var navActions = NavigationActions.reset({
             index: 0,
-            actions: [NavigationActions.navigate({routeName: "Login"})]
+            actions: [NavigationActions.navigate({ routeName: "Login" })]
         });
         this.props.navigation.dispatch(navActions);
     }
 
     render() {
         return (
-            <View style={{paddingTop:50, alignItems:"center"}}>
+            <View style={{ backgroundColor: "#85C1E9", paddingTop: 50, alignItems: "center" }}>
 
-                <Text>Signup</Text>
+                <Text style={{ fontSize: 30, color: "white", fontWeight: "bold" }}>Signup</Text>
+                <View style={{ paddingTop: 10 }}>
+                    <TextInput style={styles.textInput}
+                        value={this.state.email}
+                        onChangeText={(text) => { this.setState({ email: text }) }}
+                        placeholder="   Email"
+                        keyboardType="email-address"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                    />
 
-                <TextInput style={{width: 200, height: 40, borderWidth: 1}}
-                    value={this.state.email}
-                    onChangeText={(text) => { this.setState({email: text}) }}
-                    placeholder="Email"
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                />
+                    <View style={{ paddingTop: 10 }} />
 
-                <View style={{paddingTop:10}} />
+                    <TextInput style={styles.textInput}
+                        value={this.state.password}
+                        onChangeText={(text) => { this.setState({ password: text }) }}
+                        placeholder="   Password"
+                        secureTextEntry={true}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                    />
 
-                <TextInput style={{width: 200, height: 40, borderWidth: 1}}
-                    value={this.state.password}
-                    onChangeText={(text) => { this.setState({password: text}) }}
-                    placeholder="Password"
-                    secureTextEntry={true}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                />
+                    <View style={{ paddingTop: 10 }} />
 
-                <View style={{paddingTop:10}} />
+                    <TextInput style={styles.textInput}
+                        value={this.state.passwordConfirm}
+                        onChangeText={(text) => { this.setState({ passwordConfirm: text }) }}
+                        placeholder="   Password (confirm)"
+                        secureTextEntry={true}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                    />
 
-                <TextInput style={{width: 200, height: 40, borderWidth: 1}}
-                    value={this.state.passwordConfirm}
-                    onChangeText={(text) => { this.setState({passwordConfirm: text}) }}
-                    placeholder="Password (confirm)"
-                    secureTextEntry={true}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                />
-
-                <Button title="Signup" onPress={this.onSignupPress} />
-
-                <Button title="Back to Login" onPress={this.onBackToLoginPress} />
+                    <Button title="Signup" onPress={this.onSignupPress} />
+                </View>
+                <View style={{ borderTopWidth: 1, backgroundColor: "white", borderColor: "black", width: 800, marginTop: 290 }}>
+                    <Button title="Back to Login" onPress={this.onBackToLoginPress} />
+                </View>
             </View>
         );
     }
 }
 
-const styles = StyleSheet.create({
+const styles = {
+    textInput: {
+        width: 200,
+        height: 40,
+        borderWidth: 1,
+        borderRadius: 10
+    },
 
-});
+};
