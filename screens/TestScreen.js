@@ -114,7 +114,7 @@ export default class TestScreen extends Component {
             for (let i = 0; i < challenges.length; i++) {
                 newBoard[i].name = challenges[i]
             }
-            this.setState({ board: newBoard, activeBoard: active })
+            this.setState({ board: newBoard, activeBoard: active, boardComplete: false })
         })
     }
     //==================================================================
@@ -411,7 +411,8 @@ export default class TestScreen extends Component {
                         // borderColor: 'red', borderWidth: 20
                     }}>
                     {this.state.boardComplete ? <View>
-                        <Text style={{textAlign: 'center'}}>Congrats!! Do you want to save your board?</Text><Button  title="Save Board"
+                        <Text style={{textAlign: 'center'}}>Congrats!! Do you want to save your board?</Text>
+                        <Button  title="Save Board"
                             style={{}}
                             onPress={() => { this.generateBoard() }} /></View> : <View />}
 
