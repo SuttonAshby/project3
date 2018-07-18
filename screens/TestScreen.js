@@ -132,7 +132,7 @@ export default class TestScreen extends Component {
         }
         // console.log(checkArray)
         const result = checkArray.every(this.isNotNull)
-        console.log(result)
+        // console.log(result)
         this.setState({ boardComplete: result })
         return result
 

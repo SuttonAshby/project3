@@ -34,5 +34,25 @@
     {
         "id": 9,
         "anime": "Pokemon"
+    },
+    {
+        "id": 10,
+        "anime": "Cowboy Bebop"
+    },
+    {
+        "id": 11,
+        "anime": "Fullmetal Alchemist"
+    },
+    {
+        "id": 12,
+        "anime": "Ghost in the Shell"
+    },
+    {
+        "id": 13,
+        "anime": "Attack on Titan"
+    },
+    {
+        "id": 14,
+        "anime": "Tokyo Ghoul"
     }
 ]
